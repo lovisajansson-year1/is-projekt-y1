@@ -2,8 +2,9 @@
  * 
  */
 /**
- * @author marc
+ * @author lovisajansson
  *
  */
-module Ett {
+module module {
+	exports Test;
 }

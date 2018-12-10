@@ -10,6 +10,7 @@ bin/
 .project
 .classpath
 .metadata/
+.DS_Store
 
 # IntelliJ
 .idea/
