@@ -6,6 +6,7 @@ public class Hej {
 		// TODO Auto-generated method stub
 
 		System.out.println("hej");
+		System.out.println("då");
 	}
 
 }
