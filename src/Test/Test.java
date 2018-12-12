@@ -8,6 +8,7 @@ public class Test {
 		System.out.println("Funka");
 		System.out.println("hej");
 		System.out.println("då");
+		System.out.println("hej");
 	}
 
 }
