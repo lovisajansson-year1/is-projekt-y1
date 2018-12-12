@@ -1,6 +1,7 @@
 /.metadata/
 .DS_Store
 
+
 *.class
 
 bin/
@@ -10,16 +11,9 @@ bin/
 .project
 .classpath
 .metadata/
+.git
+.bin
 
-# IntelliJ
-.idea/
-*.iml
-*.ipr
-*.iws
-atlassian-ide-plugin.xml
-
-# Maven files
-target/
 
 # Package Files #
 *.jar
