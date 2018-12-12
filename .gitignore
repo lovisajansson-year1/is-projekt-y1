@@ -1,6 +1,7 @@
 /.metadata/
 .DS_Store
 
+
 *.class
 
 bin/
@@ -12,15 +13,6 @@ bin/
 .metadata/
 .DS_Store
 
-# IntelliJ
-.idea/
-*.iml
-*.ipr
-*.iws
-atlassian-ide-plugin.xml
-
-# Maven files
-target/
 
 # Package Files #
 *.jar
