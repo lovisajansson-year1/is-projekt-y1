@@ -6,5 +6,5 @@
  *
  */
 module module {
-	exports Test;
+	
 }
