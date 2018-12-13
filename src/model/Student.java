@@ -1,7 +1,9 @@
 package model;
+
 import java.util.ArrayList;
 
 public class Student {
+	
 	private String studentId; //Börjar med "S" sen 5 siffror ex. "S10032"
 	private String name;
 	//private ArrayList<WrittenExam> exams = new ArrayList<WrittenExam>();  BEhövs inte?
