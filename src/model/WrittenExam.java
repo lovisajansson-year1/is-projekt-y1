@@ -5,6 +5,7 @@ package model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 public class WrittenExam {
 
@@ -51,8 +52,9 @@ public class WrittenExam {
         return examID;
     }
 
-    //kontrollerar om första char == 'E' eller om examID inte har längden 6.
+    //kontrollerar att första char == 'E' och att examID har längden 6.
     public void setExamID(String examID) {
+    	if(examID.equals("")){generateExamID();}
 		if(examID.length()==6 && examID.charAt(0)==('E')) {
 			String examIDnumber = examID.substring(1,5);
 			int code = 0;
@@ -68,6 +70,14 @@ public class WrittenExam {
 		} else {
 			System.out.println("ExamID must be E followed by 5 numbers");
 		}
+	}
+    
+    //If no ExamID given, generate one
+    public void generateExamID() {
+    	String genID = "E";
+    	Random r = new Random();
+    	int result = r.nextInt(90000) + 10000; //(random between 0 and 80.999) + 10.000
+    	genID = genID + result; //CHECK IF TAKEN IN the CourseRegister.getExamIds()?
 	}
 
     public Date getDate() {

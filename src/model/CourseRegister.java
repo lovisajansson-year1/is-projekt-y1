@@ -7,6 +7,7 @@ public class CourseRegister {
 	
 	private ArrayList<Course> courseRegister = new ArrayList<Course>();
 	private String name;
+
 	
 	
 	public String getName() {
@@ -25,9 +26,32 @@ public class CourseRegister {
 		this.courseRegister = courseRegister;
 	}
 	public void addCourse(Course course) {
-		this.courseRegister.add(course);
-		
+		this.courseRegister.add(course); //Course added.
 	}
+	
+	//returns ArrayList with all WrittenExams
+	public ArrayList<WrittenExam> getExams() {
+		ArrayList<WrittenExam> exams = new ArrayList<WrittenExam>();
+		for(Course tmp: this.courseRegister ) {
+			for(WrittenExam exam : tmp.getWrittenExams()) {
+				exams.add(exam);
+			}
+		}
+		return exams;
+	}
+	
+	//returns ArrayList with all WrittenExam ID's
+	public ArrayList<String> getExamIds() {
+		ArrayList<String> examIds = new ArrayList<String>();
+		for(Course tmp: this.courseRegister ) {
+			for(WrittenExam exam : tmp.getWrittenExams()) {
+				examIds.add(exam.getExamID());
+			}
+		}
+		return examIds;
+	}
+	
+	
 	public Course findCourse(String courseCode) {
 		for(Course tmp: this.courseRegister) {
 			if(tmp.getCourseCode().equals(courseCode)) {
@@ -44,7 +68,18 @@ public class CourseRegister {
 			}
 			return tmp;
 		}
-	}
+	
+//	public WrittenExam findExam(String examID) {
+//		for(WrittenExam tmp: this.exams) {
+//			if(tmp.getExamID().equals(examID)) {
+//				return tmp;
+//			}
+//		}
+//		return null;
+//	}
+		
+	
+}
 	
 	
 
