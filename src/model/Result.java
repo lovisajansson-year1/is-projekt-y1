@@ -11,7 +11,7 @@ public class Result {
 	private Student student;
 	private WrittenExam exam;
 	
-	public void Result(Student student, WrittenExam exam, int credits) {
+	public Result(Student student, WrittenExam exam, int credits) {
 		this.student = student;
 		this.exam = exam;
 		this.credits = credits;
@@ -37,10 +37,10 @@ public class Result {
 	public void setStudent(Student student) {
 		this.student = student;
 	}
-	public Exam getExam() {
+	public WrittenExam getExam() {
 		return exam;
 	}
-	public void setExam(Exam exam) {
+	public void setExam(WrittenExam exam) {
 		this.exam = exam;
 	}
 	

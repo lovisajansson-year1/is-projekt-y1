@@ -19,9 +19,8 @@ public class Student {
 	public String getStudentId() {
 		return studentId;
 	}
-	public void setStudentId(String studentId) {
-		this.studentId = studentId;
-	}
+
+	
 	public String getName() {
 		return name;
 	}
@@ -48,10 +47,11 @@ public class Student {
 		ArrayList<Student> studenter = register.getStudents();
 		String newId;
 		for(int i=10000+studenter.size(); i<100000; i++) {
-			String newId = "S" + i.toString();
+			newId = "S" + Integer.toString(i);
 			for(Student s: studenter) {
 				if(s.getStudentId().equals(newId)) {
 					newId = null;
+					break;
 				}
 			}
 			if(newId != null) {

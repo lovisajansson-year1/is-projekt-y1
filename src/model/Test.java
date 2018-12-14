@@ -7,6 +7,7 @@ public class Test {
 		
 		Course c = new Course();
 		c.setCourseCode("bajs");
+		c.getCourseCode();
 	}
 
 }
