@@ -44,6 +44,12 @@ public class CourseRegister {
 			}
 			return tmp;
 		}
+	public void printCourses() {
+		for(Course tmp: courseRegister) {
+			System.out.println(tmp.getName());
+		}
+	}
+	
 	}
 	
 	

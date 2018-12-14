@@ -38,7 +38,7 @@ public ArrayList<Student> getStudents() {
  public void addStudent(Student tmp) {
 	 this.students.add(tmp);
  }
-
+//skriver ut namn på studenter
  public void printStudents() {
 	 for(Student s: students) {
 		 System.out.println(s.getName());	 }

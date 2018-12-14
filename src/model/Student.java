@@ -9,6 +9,7 @@ public class Student {
 	//private ArrayList<WrittenExam> exams = new ArrayList<WrittenExam>();  BEhövs inte?
 	private ArrayList<Result> results = new ArrayList<Result>();
 	private StudentRegister register;
+	
 
 	public Student(String name, StudentRegister register) {
 		this.name = name;

@@ -9,6 +9,17 @@ public class Course {
 	private ArrayList<WrittenExam> writtenExams = new ArrayList<WrittenExam> ();
 	private CourseRegister courseRegister;
 
+	
+	//Constructor som tilldelar namn samt dubbelkopplar till studentregister samt genererar kurskod
+	public Course(String name, CourseRegister courseRegister, double credits) {
+		this.name = name;
+		this.courseRegister = courseRegister;
+		this.courseCode = this.generateCourseCode(courseRegister);
+		courseRegister.addCourse(this);
+		this.credits = credits;
+	}
+
+	
 	//getters & setters
 	public String getCourseCode() {
 		return courseCode;
