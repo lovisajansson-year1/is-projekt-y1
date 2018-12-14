@@ -34,5 +34,9 @@ public ArrayList<Student> getStudents() {
     }
     return s;
   }
+  
+ public void addStudent(Student tmp) {
+	 this.students.add(tmp);
+ }
 
 }

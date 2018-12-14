@@ -56,5 +56,9 @@ public class Student {
 		return null;
 	}
 
+	public String getName() {
+		return name;
+	}
+
 }
 

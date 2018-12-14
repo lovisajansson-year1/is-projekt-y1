@@ -6,8 +6,13 @@ public class Test {
 		// TODO Auto-generated method stub	
 		
 		Course c = new Course();
-		c.setCourseCode("bajs");
-		c.getCourseCode();
+		CourseRegister register = new CourseRegister();
+		StudentRegister studentregister = new StudentRegister();
+		Student s = new Student("Lovisa", studentregister);
+		s.generateStudentId(studentregister);
+		studentregister.addStudent(s);
+		System.out.println(s.getName()+s.getStudentId()+studentregister.findStudent("S10000").getName());
+		
 	}
 
 }
