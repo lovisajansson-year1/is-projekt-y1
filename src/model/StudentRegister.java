@@ -3,17 +3,23 @@ import java.util.ArrayList;
 
 public class StudentRegister{
   private String namn;
-  private ArrayList<Student> studenter = new ArrayList<Student>();
+  private ArrayList<Student> students = new ArrayList<Student>();
 
-  public ArrayList<Student> getStudenter() {
-    return this.studenter;
-  }
-  public void setStudenter(ArrayList<Student> studenter) {
-    this.studenter = studenter;
+  public String getNamn() {
+	return namn;
+}
+public void setNamn(String namn) {
+	this.namn = namn;
+}
+public void setStudents(ArrayList<Student> students) {
+	this.students = students;
+}
+public ArrayList<Student> getStudents() {
+    return this.students;
   }
 
   public Student findStudent(String studentId) {
-    for(Student s: this.studenter) {
+    for(Student s: this.students) {
       if(s.getStudentId().equals(studentId)) {
         return s;
       }
@@ -24,7 +30,7 @@ public class StudentRegister{
   public Student removeStudent(String studentId) {
     Student s = this.findStudent(studentId);
     if(s != null) {
-      this.studenter.remove(s);
+      this.students.remove(s);
     }
     return s;
   }
