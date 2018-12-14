@@ -19,11 +19,6 @@ public class Student {
 	public String getStudentId() {
 		return studentId;
 	}
-
-	
-	public String getName() {
-		return name;
-	}
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -55,7 +50,7 @@ public class Student {
 				}
 			}
 			if(newId != null) {
-				return newId;
+				return this.studentId = newId;
 			}
 		}
 		return null;
