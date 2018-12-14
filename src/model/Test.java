@@ -9,9 +9,16 @@ public class Test {
 
 		
 		
-		Course c = new Course();
-		c.setCourseCode("bajs");
-		c.getCourseCode();
+		CourseRegister register = new CourseRegister();
+		Course c = new Course("Systemvetenskap", register, 44);
+		StudentRegister studentregister = new StudentRegister();
+		Student s = new Student("Lovisa", studentregister);
+		Student s2 = new Student("Marc", studentregister);
+		studentregister.printStudents();
+		register.printCourses();
+		register.removeCourse(c.getCourseCode());
+		register.printCourses();
+
 	}
 
 }

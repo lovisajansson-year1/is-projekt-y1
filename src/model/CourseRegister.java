@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class CourseRegister {
 
-	
+
 	private ArrayList<Course> courseRegister = new ArrayList<Course>();
 	private String name;
 
-	
-	
+
+
 	public String getName() {
 		return name;
 	}
@@ -28,7 +28,7 @@ public class CourseRegister {
 	public void addCourse(Course course) {
 		this.courseRegister.add(course); //Course added.
 	}
-	
+
 	//returns ArrayList with all WrittenExams
 	public ArrayList<WrittenExam> getExams() {
 		ArrayList<WrittenExam> exams = new ArrayList<WrittenExam>();
@@ -39,7 +39,7 @@ public class CourseRegister {
 		}
 		return exams;
 	}
-	
+
 	//returns ArrayList with all WrittenExam ID's
 	public ArrayList<String> getExamIds() {
 		ArrayList<String> examIds = new ArrayList<String>();
@@ -50,8 +50,8 @@ public class CourseRegister {
 		}
 		return examIds;
 	}
-	
-	
+
+
 	public Course findCourse(String courseCode) {
 		for(Course tmp: this.courseRegister) {
 			if(tmp.getCourseCode().equals(courseCode)) {
@@ -59,7 +59,7 @@ public class CourseRegister {
 			}
 		}
 		return null;
-		
+
 	}
 	public Course removeCourse(String courseCode) {
 		Course tmp = this.findCourse(courseCode);
@@ -68,18 +68,12 @@ public class CourseRegister {
 			}
 			return tmp;
 		}
-	
-//	public WrittenExam findExam(String examID) {
-//		for(WrittenExam tmp: this.exams) {
-//			if(tmp.getExamID().equals(examID)) {
-//				return tmp;
-//			}
-//		}
-//		return null;
-//	}
-		
-	
-}
-	
-	
 
+
+	public void printCourses() {
+		for(Course tmp: courseRegister) {
+			System.out.println(tmp.getName());
+		}
+	}
+
+	}
