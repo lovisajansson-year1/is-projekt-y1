@@ -2,13 +2,13 @@ package model;
 import java.util.ArrayList;
 public class Course {
 
-	
+
 	private String courseCode; // unique, begins with capital C followed by number between 1000 and 9999
 	private String name;
 	private double credits;
 	private ArrayList<WrittenExam> writtenExams = new ArrayList<WrittenExam> ();
 	private CourseRegister courseRegister;
-	
+
 	//getters & setters
 	public String getCourseCode() {
 		return courseCode;
@@ -38,8 +38,8 @@ public class Course {
 		return null;
 	}
 
-	
-	
+
+
 	public CourseRegister getCourseRegister() {
 		return courseRegister;
 	}
@@ -61,6 +61,6 @@ public class Course {
 	public void setCredits(double credits) {
 		this.credits = credits;
 	}
-	
-	
+
+
 }

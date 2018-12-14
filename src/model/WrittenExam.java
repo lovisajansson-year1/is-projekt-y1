@@ -16,7 +16,6 @@ public class WrittenExam {
     private List<Student> students;
 
 
-
     //one constructor for setting datapoint directly
     public WrittenExam (String examID, Date date, String location, int time, int maxPoints) {
         this.date = date;
@@ -27,7 +26,18 @@ public class WrittenExam {
 
         //Initilizing the arraylist
         students = new ArrayList<Student>();
+    }
+    
+    //constructor with default maxValue 100.
+    public WrittenExam (String examID, Date date, String location, int time) {
+        this.date = date;
+        this.examID = examID;
+        this.location = location;
+        this.time = time;
+        this.maxPoints = 100;
 
+        //Initilizing the arraylist
+        students = new ArrayList<Student>();
     }
 
 
@@ -41,9 +51,24 @@ public class WrittenExam {
         return examID;
     }
 
+    //kontrollerar om första char == 'E' eller om examID inte har längden 6.
     public void setExamID(String examID) {
-        this.examID = examID;
-    }
+		if(examID.length()==6 && examID.charAt(0)==('E')) {
+			String examIDnumber = examID.substring(1,5);
+			int code = 0;
+			try {
+				code = Integer.parseInt(examIDnumber);
+			} catch(Exception notnumbers) {
+				System.out.println("The E must be followed by 5 numbers");
+				}
+			//
+			if(code>=10000 && code<=99999) { 
+				this.examID = examID; 
+				} 
+		} else {
+			System.out.println("ExamID must be E followed by 5 numbers");
+		}
+	}
 
     public Date getDate() {
         return date;
