@@ -16,6 +16,8 @@ public class Result {
 		this.exam = exam;
 		this.credits = credits;
 		this.calculateGrade(credits);
+		this.exam.addResult(this);
+		this.student.addResult(this);
 	}
 	
 	public int getCredits() {

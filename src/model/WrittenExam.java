@@ -13,7 +13,7 @@ public class WrittenExam {
     private String location;
     private int time;
     private int maxPoints;
-    private List<Student> students;
+    private ArrayList<Result> results = new ArrayList<Result>();
 
 
     //one constructor for setting datapoint directly
@@ -23,9 +23,8 @@ public class WrittenExam {
         this.location = location;
         this.time = time;
         this.maxPoints = maxPoints;
-
-        //Initilizing the arraylist
-        students = new ArrayList<Student>();
+       
+        
     }
     
     //constructor with default maxValue 100.
@@ -102,13 +101,18 @@ public class WrittenExam {
         this.maxPoints = maxPoints;
     }
 
-    public List<Student> getStudents() {
-        return students;
-    }
+	public ArrayList<Result> getResults() {
+		return results;
+	}
 
-    public void setStudents(List<Student> students) {
-        this.students = students;
+	public void setResults(ArrayList<Result> results) {
+		this.results = results;
+	}
+
+    public void addResult(Result result) {
+    	this.results.add(result);
     }
+    
 
 }
 

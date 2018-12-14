@@ -30,6 +30,9 @@ public class Student {
 	public void setResults(ArrayList<Result> results) {
 		this.results = results;
 	}
+	public void addResult(Result result) {
+		this.results.add(result);
+	}
 
 	public StudentRegister getRegister() {
 		return this.register;

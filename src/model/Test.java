@@ -15,6 +15,7 @@ public class Test {
 		register.removeCourse(c.getCourseCode());
 		register.printCourses();
 
+		
 	}
 
 }
