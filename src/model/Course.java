@@ -23,7 +23,7 @@ public class Course {
 		if(courseCode.charAt(0)==('C')) {
 			String courseCodeSubstring = courseCode.substring(1,5);
 			try {
-				int code = Integer.parseInt("courseCodeSubstring");
+				int code = Integer.parseInt(courseCodeSubstring);
 			} catch(Exception notnumbers) {
 				System.out.println("Coursecode must be a C followed by 5 numbers");
 			}
