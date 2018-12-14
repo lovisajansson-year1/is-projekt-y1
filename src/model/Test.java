@@ -1,9 +1,13 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Test {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub	
+		// TODO Auto-generated method stub
+
+		
 		
 		CourseRegister register = new CourseRegister();
 		Course c = new Course("Systemvetenskap", register, 44);
