@@ -39,4 +39,8 @@ public ArrayList<Student> getStudents() {
 	 this.students.add(tmp);
  }
 
+ public void printStudents() {
+	 for(Student s: students) {
+		 System.out.println(s.getName());	 }
+ }
 }

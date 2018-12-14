@@ -10,10 +10,11 @@ public class Student {
 	private ArrayList<Result> results = new ArrayList<Result>();
 	private StudentRegister register;
 
-	public  Student(String name, StudentRegister register) {
+	public Student(String name, StudentRegister register) {
 		this.name = name;
 		this.register = register;
 		this.studentId = this.generateStudentId(register);
+		register.addStudent(this);
 	}
 
 	public String getStudentId() {

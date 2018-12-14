@@ -9,10 +9,8 @@ public class Test {
 		CourseRegister register = new CourseRegister();
 		StudentRegister studentregister = new StudentRegister();
 		Student s = new Student("Lovisa", studentregister);
-		s.generateStudentId(studentregister);
-		studentregister.addStudent(s);
-		System.out.println(s.getName()+s.getStudentId()+studentregister.findStudent("S10000").getName());
-		
+		Student s2 = new Student("Marc", studentregister);
+		studentregister.printStudents();
 	}
 
 }
