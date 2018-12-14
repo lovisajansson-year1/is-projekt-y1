@@ -1,5 +1,9 @@
 package model;
 
+
+//Ha calculateGrade(); innanför constructorn?
+//Kalla calculateGrade(); När setCredits(); blir kallad?
+
 public class Result {
 
 	private int credits;
@@ -7,11 +11,19 @@ public class Result {
 	private Student student;
 	private WrittenExam exam;
 	
+	public void Result(Student student, WrittenExam exam, int credits) {
+		this.student = student;
+		this.exam = exam;
+		this.credits = credits;
+		this.calculateGrade(credits);
+	}
+	
 	public int getCredits() {
 		return credits;
 	}
 	public void setCredits(int credits) {
 		this.credits = credits;
+		this.calculateGrade(credits);
 	}
 	public String getGrade() {
 		return grade;
@@ -32,20 +44,21 @@ public class Result {
 		this.exam = exam;
 	}
 	
-	public void calculateGrade() {
-		if(this.credits < 50) {
-			this.grade = "F";
-		} else if(this.credits < 55) {
-			this.grade = "G";
-		} else if(this.credits < 65) {
-			this.grade = "D";
-		} else if(this.credits < 75) {
-			this.grade = "C";
-		} else if(this.credits < 85) {
-			this.grade = "B";
-		} else if(this.credits < 100) {
-			this.grade = "A";
+	public String calculateGrade(int credits) {
+		if(credits < 50) {
+			return "F";
+		} else if(credits < 55) {
+			return "G";
+		} else if(credits < 65) {
+			return "D";
+		} else if(credits < 75) {
+			return "C";
+		} else if(credits < 85) {
+			return "B";
+		} else if(credits < 100) {
+			return "A";
 		}
+		return "F";
 	}
 	
 	
