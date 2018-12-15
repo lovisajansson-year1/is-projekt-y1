@@ -36,22 +36,20 @@ public class WrittenExam {
         this.time = time;
         this.maxPoints = 100;
 
-        //Initilizing the arraylist
-        students = new ArrayList<Student>();
+
     }
 
 
     //one constructor for not setting the datapoints directyl
     public WrittenExam(){
-        students = new ArrayList<Student>();
-
-    }
+        }
 
     public String getExamID() {
         return examID;
     }
 
     //kontrollerar att första char == 'E' och att examID har längden 6.
+    // behövs denna metoden om vi har generate exam?
     public void setExamID(String examID) {
     	if(examID.equals("")){generateExamID();}
 		if(examID.length()==6 && examID.charAt(0)==('E')) {
@@ -62,7 +60,7 @@ public class WrittenExam {
 			} catch(Exception notnumbers) {
 				System.out.println("The E must be followed by 5 numbers");
 				}
-			//
+			// 
 			if(code>=10000 && code<=99999) { 
 				this.examID = examID; 
 				} 

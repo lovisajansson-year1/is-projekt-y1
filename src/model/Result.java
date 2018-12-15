@@ -6,26 +6,26 @@ package model;
 
 public class Result {
 
-	private int credits;
+	private int points;
 	private String grade;
 	private Student student;
 	private WrittenExam exam;
 	
-	public Result(Student student, WrittenExam exam, int credits) {
+	public Result(Student student, WrittenExam exam, int points) {
 		this.student = student;
 		this.exam = exam;
-		this.credits = credits;
-		this.calculateGrade(credits);
+		this.points = points;
+		this.calculateGrade(points);
 		this.exam.addResult(this);
 		this.student.addResult(this);
 	}
 	
-	public int getCredits() {
-		return credits;
+	public int getPoints() {
+		return points;
 	}
-	public void setCredits(int credits) {
-		this.credits = credits;
-		this.calculateGrade(credits);
+	public void setPoints(int points) {
+		this.points = points;
+		this.calculateGrade(points);
 	}
 	public String getGrade() {
 		return grade;
@@ -46,21 +46,21 @@ public class Result {
 		this.exam = exam;
 	}
 	
-	public String calculateGrade(int credits) {
-		if(credits < 50) {
-			return "F";
-		} else if(credits < 55) {
-			return "G";
-		} else if(credits < 65) {
-			return "D";
-		} else if(credits < 75) {
-			return "C";
-		} else if(credits < 85) {
-			return "B";
-		} else if(credits < 100) {
-			return "A";
+	public char calculateGrade(int points) {
+		if(points < 50) {
+			return 'F';
+		} else if(points < 55) {
+			return 'G';
+		} else if(points < 65) {
+			return 'D';
+		} else if(points < 75) {
+			return 'C';
+		} else if(points < 85) {
+			return 'B';
+		} else if(points < 100) {
+			return 'A';
 		}
-		return "F";
+		return 'F';//om poängen är mer än max?
 	}
 	
 	
