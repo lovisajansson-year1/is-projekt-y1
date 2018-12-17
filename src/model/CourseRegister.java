@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import copy.Course;
+
 public class CourseRegister {
 
 
@@ -40,7 +42,7 @@ public class CourseRegister {
 		return exams;
 	}
 
-	//returns ArrayList with all WrittenExam ID's
+	//returns ArrayList with all WrittenExam ID's for every course
 	public ArrayList<String> getExamIds() {
 		ArrayList<String> examIds = new ArrayList<String>();
 		for(Course tmp: this.courseRegister ) {
@@ -68,7 +70,11 @@ public class CourseRegister {
 			}
 			return tmp;
 		}
-
+	
+	public void updateCourse(String courseCode, String newName) {
+		Course c = this.findCourse(courseCode);
+		c.setName(newName);
+  	}
 
 	public void printCourses() {
 		for(Course tmp: courseRegister) {
