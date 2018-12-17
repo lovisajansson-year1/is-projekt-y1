@@ -1,5 +1,7 @@
 package model;
 import java.util.ArrayList;
+
+import copy.WrittenExam;
 public class Course {
 
 
@@ -32,6 +34,19 @@ public class Course {
 	}
 	public void addWrittenExam(WrittenExam writtenExam) {
 		this.writtenExams.add(writtenExam);
+	}
+	public void removeExam(String id) {
+		if(this.writtenExams == null) {
+			System.out.println("fel");
+			return;
+		}
+		for(WrittenExam e: this.writtenExams) {
+			System.out.println(e.getExamID());
+			if(e.getExamID().equals(id)){
+				writtenExams.remove(e);
+			}
+		}
+		System.out.println(writtenExams.size());
 	}
 	// genererar kursid och checkar så att det inte redan finns
 	public String generateCourseCode(CourseRegister courseRegister) {
