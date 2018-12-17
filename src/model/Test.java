@@ -9,16 +9,22 @@ public class Test {
 
 		
 		
-		CourseRegister register = new CourseRegister();
-		Course c = new Course("Systemvetenskap", register, 44);
+		CourseRegister kursregister = new CourseRegister();
+		Course c = new Course("Systemvetenskap", kursregister, 44);
 		StudentRegister studentregister = new StudentRegister();
 		Student s = new Student("Lovisa", studentregister);
 		Student s2 = new Student("Marc", studentregister);
+		WrittenExam w = new WrittenExam();
+		c.addWrittenExam(w);
 		studentregister.printStudents();
-		register.printCourses();
-		register.removeCourse(c.getCourseCode());
-		register.printCourses();
-
+		kursregister.printCourses();
+		kursregister.removeCourse(c.getCourseCode());
+		kursregister.printCourses();
+		Result tmp = new Result(s,w,22);
+		tmp = new Result(s2,w,100);
+		for(Result r: w.getResults()) {
+			System.out.println(r.getGrade());
+		}
 		
 	}
 

@@ -7,7 +7,7 @@ package model;
 public class Result {
 
 	private int points;
-	private String grade;
+	private char grade;
 	private Student student;
 	private WrittenExam exam;
 	
@@ -15,7 +15,7 @@ public class Result {
 		this.student = student;
 		this.exam = exam;
 		this.points = points;
-		this.calculateGrade(points);
+		this.grade = this.calculateGrade(points);
 		this.exam.addResult(this);
 		this.student.addResult(this);
 	}
@@ -27,10 +27,10 @@ public class Result {
 		this.points = points;
 		this.calculateGrade(points);
 	}
-	public String getGrade() {
+	public char getGrade() {
 		return grade;
 	}
-	public void setGrade(String grade) {
+	public void setGrade(char grade) {
 		this.grade = grade;
 	}
 	public Student getStudent() {

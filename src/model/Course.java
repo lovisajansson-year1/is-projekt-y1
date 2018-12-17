@@ -30,6 +30,9 @@ public class Course {
 	public void setWrittenExams(ArrayList<WrittenExam> writtenExams) {
 		this.writtenExams = writtenExams;
 	}
+	public void addWrittenExam(WrittenExam writtenExam) {
+		this.writtenExams.add(writtenExam);
+	}
 	// genererar kursid och checkar så att det inte redan finns
 	public String generateCourseCode(CourseRegister courseRegister) {
 		ArrayList<Course> course = courseRegister.getCourseRegister();
