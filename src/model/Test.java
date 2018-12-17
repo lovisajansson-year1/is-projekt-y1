@@ -10,7 +10,7 @@ public class Test {
 		
 		
 		CourseRegister kursregister = new CourseRegister();
-		Course c = new Course("Systemvetenskap", kursregister, 44);
+		Course c = new Course("Systemvetenskap", kursregister);
 		StudentRegister studentregister = new StudentRegister();
 		Student s = new Student("Lovisa", studentregister);
 		Student s2 = new Student("Marc", studentregister);

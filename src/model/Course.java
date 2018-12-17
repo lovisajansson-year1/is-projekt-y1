@@ -10,12 +10,11 @@ public class Course {
 	private CourseRegister courseRegister;
 
 	//Constructor som tilldelar namn samt dubbelkopplar till studentregister samt genererar kurskod
-	public Course(String name, CourseRegister courseRegister, double credits) {
+	public Course(String name, CourseRegister courseRegister) {
 		this.name = name;
 		this.courseRegister = courseRegister;
 		this.courseCode = this.generateCourseCode(courseRegister);
 		courseRegister.addCourse(this);
-		this.credits = credits;
 	}
 
 	
