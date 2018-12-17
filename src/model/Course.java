@@ -1,7 +1,5 @@
 package model;
 import java.util.ArrayList;
-
-import copy.WrittenExam;
 public class Course {
 
 

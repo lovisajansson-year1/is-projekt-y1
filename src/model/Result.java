@@ -11,6 +11,7 @@ public class Result {
 	private Student student;
 	private WrittenExam exam;
 	
+	//beräkna betyg och dubbelkoppla till student och exam
 	public Result(Student student, WrittenExam exam, int points) {
 		this.student = student;
 		this.exam = exam;

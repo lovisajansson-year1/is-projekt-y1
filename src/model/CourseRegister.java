@@ -2,8 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-import copy.Course;
-
 public class CourseRegister {
 
 
