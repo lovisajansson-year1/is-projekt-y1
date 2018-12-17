@@ -9,7 +9,6 @@ public class Course {
 	private ArrayList<WrittenExam> writtenExams = new ArrayList<WrittenExam> ();
 	private CourseRegister courseRegister;
 
-	
 	//Constructor som tilldelar namn samt dubbelkopplar till studentregister samt genererar kurskod
 	public Course(String name, CourseRegister courseRegister, double credits) {
 		this.name = name;
@@ -47,8 +46,8 @@ public class Course {
 		System.out.println(writtenExams.size());
 	}
 	// genererar kursid och checkar så att det inte redan finns
-	public String generateCourseCode(CourseRegister courseRegister) {
-		ArrayList<Course> course = courseRegister.getCourseRegister();
+	public String generateCourseCode(CourseRegister courses) {
+		ArrayList<Course> course = courses.getCourses();
 		String newCode;
 		for(int i=10000+course.size(); i<100000; i++) {
 			newCode = "C" + Integer.toString(i);
