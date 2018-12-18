@@ -5,11 +5,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import copy.Course;
-import copy.ObservableList;
-import copy.Result;
-import copy.Student;
-import copy.WrittenExam;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -158,7 +155,7 @@ public class Controller {
 			String courseId = course.substring(course.length() - 6, course.length());
 			Course selectedCourse = courseRegister.findCourse(courseId);//Get the course the user selected
 			WrittenExam newExam = new WrittenExam(location, selectedCourse);//Create exam
-			selectedCourse.addExam(newExam);//Add exam to the course the user selected
+			selectedCourse.addWrittenExam(newExam);//Add exam to the course the user selected
 			this.updateExamList();//Update the exam list to make it possible for the user to select it
 			messagesArea.setText("Exam was added to the course"); //Exam added successfully message to the user
 		}
@@ -224,8 +221,8 @@ public class Controller {
 			if(student != null) {
 				messagesArea.setText("Results for student " + student.getName() + "\n");//Headline
 				//For every exam the student has taken show grade, course, exam, points
-				for(Result r: student.getResults()) {
-					messagesArea.setText(messagesArea.getText() + "\n Exam: " + r.getExam().getExamID() + "  Course: " + r.getExam().getCourse().getName() + "  Grade: " + r.getGrade() + "  Points: " + r.getCredits());
+				for(Result result: student.getResults()) {
+					messagesArea.setText(messagesArea.getText() + "\n Exam: " + result.getExam().getExamID() + "  Course: " + result.getExam().getCourse().getName() + "  Grade: " + result.getGrade() + "  Points: " + result.getPoints());
 				}
 			}
 		}
