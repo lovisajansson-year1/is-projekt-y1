@@ -215,10 +215,12 @@ public class Controller {
 			String examId = examString.substring(0, 6);
 			Student student = studentRegister.findStudent(studentId);
 			WrittenExam exam = courseRegister.findWrittenExam(examId);
-			Result result = new Result(student, exam, credits);//lägger till resultat till student och exam och dubbelkopplar genom constructor.
-			messagesArea.setText("Grade " + result.getGrade() + " (" + result.getPoints() + " points) was registered for " + student.getName() + " on exam " + examId);
+			Result result = new Result(student, exam, credits, this.calculateGrade(credits));//Turn the points into a grade with local method calculateGrade()
+			student.addResult(result);
+			messagesArea.setText("Grade " + this.calculateGrade(credits) + " (" + credits + " points) was registered for " + student.getName() + " on exam " + examId);
 			resultText.setText("");
-		}
+				
+			}
 		
 		//Shows all results for student, even on removed exams
 		@FXML public void showResults() {
@@ -239,22 +241,7 @@ public class Controller {
 			}
 		}
 		//Turn points into grade
-		public String calculateGrade(int credits) {
-			if(credits < 50) {
-				return "F";
-			} else if(credits < 55) {
-				return "G";
-			} else if(credits < 65) {
-				return "D";
-			} else if(credits < 75) {
-				return "C";
-			} else if(credits < 85) {
-				return "B";
-			} else if(credits < 100) {
-				return "A";
-			}
-			return "F";
-		}	
+		
 		
 		//To be able to show the list of students 
 		//we have to turn the array list of type Student to an array list of type String
@@ -285,5 +272,21 @@ public class Controller {
 			}
 			return stringExams;
 		}
+		public String calculateGrade(int credits) {
+			if(credits < 50) {
+				return "F";
+			} else if(credits < 55) {
+				return "G";
+			} else if(credits < 65) {
+				return "D";
+			} else if(credits < 75) {
+				return "C";
+			} else if(credits < 85) {
+				return "B";
+			} else if(credits < 100) {
+				return "A";
+			}
+			return "F";
+		}	
 	
 }
