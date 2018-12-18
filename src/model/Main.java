@@ -25,6 +25,8 @@ public class Main extends Application {
 	}//End start
 	public static void main(String[] args) {
 		launch(args);
+		StudentRegister register = new StudentRegister();
+		Student lovisa = new Student("lovisa", register );
 	}
 	
 }
