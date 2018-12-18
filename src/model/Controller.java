@@ -75,6 +75,21 @@ public class Controller {
 			this.updateStudentList(studentRegister.getStudents());//Update the list of students, with the new student added
 			studentNameText.setText("");//Remove the name the user wrote from the textfield
 		}
+		
+		
+		@FXML public void removeStudent() {
+			messagesArea.setText("");
+			String student = (String) pickStudent.getValue();//The selected value/student in the student list
+			if(student != null) {
+				String studentId = student.substring(student.length() - 6, student.length());			
+				studentRegister.removeStudent(studentId); //Remove student from DB
+				this.updateStudentList(studentRegister.getStudents());
+				messagesArea.setText(student + " was removed from students");
+			} else {
+				messagesArea.setText("You have to select a student to delete");
+			}		
+		}
+		
 		//Select student in list, write new name and click update student
 		@FXML public void updateStudent() {
 			messagesArea.setText("");
@@ -203,7 +218,7 @@ public class Controller {
 			String examId = examString.substring(0, 6);
 			Student student = studentRegister.findStudent(studentId);
 			WrittenExam exam = courseRegister.findWrittenExam(examId);
-			Result result = new Result(student, exam, credits);//lägger till resultat till student och exam och dubbelkopplar genom constructor.
+			Result result = new Result(student, exam, credits);//lï¿½gger till resultat till student och exam och dubbelkopplar genom constructor.
 			messagesArea.setText("Grade " + result.getGrade() + " (" + result.getPoints() + " points) was registered for " + student.getName() + " on exam " + examId);
 			resultText.setText("");
 		}
