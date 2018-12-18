@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import copy.Course;
 import copy.ObservableList;
+import copy.Result;
 import copy.Student;
 import copy.WrittenExam;
 import javafx.event.ActionEvent;
@@ -180,6 +181,101 @@ public class Controller {
 		}
 		
 		
-
+		
+		@FXML public void addResult() {
+			messagesArea.setText("");
+			int credits = 0;
+			String examString = (String) this.pickExam.getValue();
+			String studentString = (String) this.pickStudent.getValue();
+			if(examString == null || studentString == null) {
+				messagesArea.setText("You have to select a student and an exam to add result");
+				return;
+			}
+			//Check if the user input is able to be turned in to a in. No letters allowed as input
+			try {
+				credits = Integer.parseInt(resultText.getText());
+			} catch(Error err) {
+				messagesArea.setText("The result must be a number between 0 and 100");//Errormessage 
+			}
+			if(credits >= 0 && credits <= 100) {
+				messagesArea.setText("Grade: " + this.calculateGrade(credits) + "  Credits: " + credits);
+			} else {
+				messagesArea.setText("Write a number between 0 and 100");
+			}
+			String studentId = studentString.substring(studentString.length() - 6, studentString.length());
+			String examId = examString.substring(0, 6);
+			Student student = studentRegister.findStudent(studentId);
+			WrittenExam exam = courseRegister.findCourseWithExamId(examId).findExam(examId);
+			Result result = new Result(student, exam, credits, this.calculateGrade(credits));//Turn the points into a grade with local method calculateGrade()
+			student.addResult(result);
+			messagesArea.setText("Grade " + this.calculateGrade(credits) + " (" + credits + " points) was registered for " + student.getName() + " on exam " + examId);
+			resultText.setText("");
+		}
+		
+		//Shows all results for student, even on removed exams
+		@FXML public void showResults() {
+			messagesArea.setText("");
+			String studentString = (String) pickStudent.getValue();//Selected student
+			if(studentString == null) {
+				messagesArea.setText("You have to pick a student to show results for");
+				return;
+			}
+			String studentId = studentString.substring(studentString.length() - 6, studentString.length());
+			Student student = studentRegister.findStudent(studentId);
+			if(student != null) {
+				messagesArea.setText("Results for student " + student.getName() + "\n");//Headline
+				//For every exam the student has taken show grade, course, exam, points
+				for(Result r: student.getResults()) {
+					messagesArea.setText(messagesArea.getText() + "\n Exam: " + r.getExam().getExamID() + "  Course: " + r.getExam().getCourse().getName() + "  Grade: " + r.getGrade() + "  Points: " + r.getCredits());
+				}
+			}
+		}
+		//Turn points into grade
+		public String calculateGrade(int credits) {
+			if(credits < 50) {
+				return "F";
+			} else if(credits < 55) {
+				return "G";
+			} else if(credits < 65) {
+				return "D";
+			} else if(credits < 75) {
+				return "C";
+			} else if(credits < 85) {
+				return "B";
+			} else if(credits < 100) {
+				return "A";
+			}
+			return "F";
+		}	
+		
+		//To be able to show the list of students 
+		//we have to turn the array list of type Student to an array list of type String
+		public ArrayList<String> studentsToStrings(ArrayList<Student> students) {
+			ArrayList<String> stringStudents = new ArrayList<String>();//Array list to be displayed in the list
+			//Make the string to be displayed in the list and add it to the list for every student in the db/register
+			for(Student s: students) {
+				String studentString = "Name: " + s.getName() + ", Id: " + s.getStudentId();
+				stringStudents.add(studentString);
+			}
+			return stringStudents;
+		}
+		//Same for courses
+		public ArrayList<String> coursesToStrings(ArrayList<Course> courses) {
+			ArrayList<String> stringCourses = new ArrayList<String>();
+			for(Course c: courses) {
+				String courseString = "Name: " + c.getName() + ", Id: " + c.getCourseCode();
+				stringCourses.add(courseString);
+			}
+			return stringCourses;
+		}
+		//Same for Exams
+		public ArrayList<String> examsToStrings(ArrayList<WrittenExam> exams) {
+			ArrayList<String> stringExams = new ArrayList<String>();
+			for(WrittenExam e: exams) {
+				String examString = e.getExamID() + ", Location: " + e.getLocation() + " course: " + e.getCourse().getCourseCode();
+				stringExams.add(examString);
+			}
+			return stringExams;
+		}
 	
 }
