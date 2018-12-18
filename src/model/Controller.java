@@ -96,6 +96,19 @@ public class Controller {
 				messagesArea.setText("You have to select a student to update");//Error message to the user
 			}
 		}
+
+		@FXML public void removeStudent() {
+			messagesArea.setText("");
+			String student = (String) pickStudent.getValue();//The selected value/student in the student list
+			if(student != null) {
+				String studentId = student.substring(student.length() - 6, student.length());			
+				studentRegister.removeStudent(studentId); //Remove student from DB
+				this.updateStudentList(studentRegister.getStudents());
+				messagesArea.setText(student + " was removed from students");
+			} else {
+				messagesArea.setText("You have to select a student to delete");
+			}		
+		}
 	
 	
 }
