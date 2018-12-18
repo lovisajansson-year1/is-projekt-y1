@@ -6,7 +6,6 @@ public class Student {
 
 	private String studentId; //Börjar med "S" sen 5 siffror ex. "S10032"
 	private String name;
-	//private ArrayList<WrittenExam> exams = new ArrayList<WrittenExam>();  BEhövs inte?
 	private ArrayList<Result> results = new ArrayList<Result>();
 	private StudentRegister register;
 	
