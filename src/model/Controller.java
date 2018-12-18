@@ -96,19 +96,90 @@ public class Controller {
 				messagesArea.setText("You have to select a student to update");//Error message to the user
 			}
 		}
-
-		@FXML public void removeStudent() {
+		//The three methods below are the same as for student above
+		//1
+		@FXML public void addCourse(ActionEvent event) {
 			messagesArea.setText("");
-			String student = (String) pickStudent.getValue();//The selected value/student in the student list
-			if(student != null) {
-				String studentId = student.substring(student.length() - 6, student.length());			
-				studentRegister.removeStudent(studentId); //Remove student from DB
-				this.updateStudentList(studentRegister.getStudents());
-				messagesArea.setText(student + " was removed from students");
+			this.addLocations();
+			String newName = courseNameText.getText();
+			if(newName.length() < 2) {
+				messagesArea.setText("The name is too short");
+				return;
+			}
+			Course newCourse = new Course(newName, courseRegister);
+			courseRegister.addCourse(newCourse);
+			messagesArea.setText("The course " + newCourse.getName()+ " with course code " +  newCourse.getCourseCode() + " har skapats!");
+			this.updateCourseList(courseRegister.getCourses());
+			courseNameText.setText("");
+		}
+		//2
+		@FXML public void updateCourse() {
+			messagesArea.setText("");
+			String course = (String) pickCourse.getValue();
+			String newName = courseNameText.getText();
+			if(newName.length() < 2) {
+				messagesArea.setText("The name is too short");
+				return;
+			}
+			if(course != null) {
+				String courseId = course.substring(course.length() - 6, course.length());
+				courseRegister.updateCourse(courseId, newName);
+				this.updateCourseList(courseRegister.getCourses());
+				messagesArea.setText("The course has changed name to " + newName);
+				courseNameText.setText("");
 			} else {
-				messagesArea.setText("You have to select a student to delete");
+				messagesArea.setText("You have to select a course to update");
+			}
+		}
+		//3
+		@FXML public void removeCourse() {
+			String course = (String) pickCourse.getValue();
+			if(course != null) {
+				String courseId = course.substring(course.length() - 6, course.length());			
+				courseRegister.removeCourse(courseId);
+				this.updateCourseList(courseRegister.getCourses());
+				this.updateExamList();
+				messagesArea.setText(course + " was removed from courses");
+			} else {
+				messagesArea.setText("You have to select a course to delete");
 			}		
 		}
-	
+		//Add an exam to a course
+		@FXML public void addExam() {
+			messagesArea.setText("");
+			String course = (String) pickCourse.getValue();//Get value/course from the course list
+			String location = (String) pickLocation.getValue();//Get value/location from the location list
+			//If no course or location is selected in the list, the user gets a error message
+			if(course == null || location == null) {
+				messagesArea.setText("You have to pick a course and a location to add an exam");
+				return;//terminate method
+			}
+			String courseId = course.substring(course.length() - 6, course.length());
+			Course selectedCourse = courseRegister.findCourse(courseId);//Get the course the user selected
+			WrittenExam newExam = new WrittenExam(location, selectedCourse);//Create exam
+			selectedCourse.addExam(newExam);//Add exam to the course the user selected
+			this.updateExamList();//Update the exam list to make it possible for the user to select it
+			messagesArea.setText("Exam was added to the course"); //Exam added successfully message to the user
+		}
+		
+		//Same principles like above
+		@FXML public void removeExam() { 
+			messagesArea.setText("");
+			String course = (String) pickCourse.getValue();
+			String exam = (String) pickExam.getValue();
+			if(course == null || exam == null) {
+				messagesArea.setText("You have to pick a course to remove an exam");
+				return;
+			}
+			String courseId = course.substring(course.length() - 6, course.length());
+			String examId = exam.substring(0, 6);
+			Course selectedCourse = courseRegister.findCourse(courseId);
+			selectedCourse.removeExam(examId);
+			this.updateExamList();
+			messagesArea.setText(examId + " was removed from " + courseId);
+		}
+		
+		
+
 	
 }
