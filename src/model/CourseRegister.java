@@ -38,6 +38,17 @@ public class CourseRegister {
 		return null;
 
 	}
+	public WrittenExam findWrittenExam(String writtenExamId) {
+		for(Course course: this.courses) {
+			for(WrittenExam exam: course.getWrittenExams() ) {
+				if(exam.getExamID()==(writtenExamId)) {
+					return exam;
+				}
+			}
+		}
+		return null;
+	}
+	
 	public Course removeCourse(String courseCode) {
 		Course tmp = this.findCourse(courseCode);
 			if(tmp!=null){

@@ -205,10 +205,9 @@ public class Controller {
 			String studentId = studentString.substring(studentString.length() - 6, studentString.length());
 			String examId = examString.substring(0, 6);
 			Student student = studentRegister.findStudent(studentId);
-			WrittenExam exam = courseRegister.findCourseWithExamId(examId).findExam(examId);
-			Result result = new Result(student, exam, credits, this.calculateGrade(credits));//Turn the points into a grade with local method calculateGrade()
-			student.addResult(result);
-			messagesArea.setText("Grade " + this.calculateGrade(credits) + " (" + credits + " points) was registered for " + student.getName() + " on exam " + examId);
+			WrittenExam exam = courseRegister.findWrittenExam(examId);
+			Result result = new Result(student, exam, credits);//lägger till resultat till student och exam och dubbelkopplar genom constructor.
+			messagesArea.setText("Grade " + result.getGrade() + " (" + result.getPoints() + " points) was registered for " + student.getName() + " on exam " + examId);
 			resultText.setText("");
 		}
 		
