@@ -35,4 +35,16 @@ public ArrayList<Student> getStudents() {
     return s;
   }
 
+  public void updateStudent(String studentId, String newName) {
+	  Student s = this.findStudent(studentId);
+	  s.setName(newName);
+  }
+ public void addStudent(Student tmp) {
+	 this.students.add(tmp);
+ }
+//skriver ut namn på studenter
+ public void printStudents() {
+	 for(Student s: students) {
+		 System.out.println(s.getName());	 }
+ }
 }
