@@ -20,8 +20,7 @@ public class Test {
 		kursregister.printCourses();
 		kursregister.removeCourse(c.getCourseCode());
 		kursregister.printCourses();
-		Result tmp = new Result(s,w,22);
-		tmp = new Result(s2,w,100);
+		
 		for(Result r: w.getResults()) {
 			System.out.println(r.getGrade());
 		}

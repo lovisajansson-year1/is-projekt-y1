@@ -28,7 +28,7 @@ public class Controller {
 
 	StudentRegister studentRegister = new StudentRegister();
 	CourseRegister courseRegister = new CourseRegister();
-	
+
 	//Updates the list of students whenever a student is added, removed or updated
 	public void updateStudentList(ArrayList<Student> students) {
 		ObservableList<String> studentList = FXCollections
@@ -57,16 +57,16 @@ public class Controller {
 	public void addLocations() {
 		ObservableList<String> locations = FXCollections
 				.observableArrayList("Room A123", "Room A167", "Room B198", "Room B067");
-		pickLocation.setItems(locations);		
+		pickLocation.setItems(locations);
 	}
-	
+
 	@FXML public void addStudent(ActionEvent event) {
 		messagesArea.setText("");//Empties the text area in the bottom to prepare for new text
 		String newName = studentNameText.getText();//Get name from text field for student name
-		//If the user writes a name shorter than 2 characters the user gets a error message 
+		//If the user writes a name shorter than 2 characters the user gets a error message
 		if(newName.length() < 2) {
 			messagesArea.setText("The name is too short");//Error message
-			return;// Terminate method so the student isn't added to the "database" 
+			return;// Terminate method so the student isn't added to the "database"
 		}
 		Student newStudent = new Student(studentNameText.getText(), studentRegister);//Create new student to add to the DB
 		studentRegister.addStudent(newStudent);//Add to DB, method in class StudentRegister
@@ -89,7 +89,7 @@ public class Controller {
 			studentRegister.updateStudent(studentId, studentNameText.getText());//Update the user in the db/register
 			this.updateStudentList(studentRegister.getStudents());//Update the list of students
 			messagesArea.setText("The student has changed name to " + studentNameText.getText());
-			studentNameText.setText("");	
+			studentNameText.setText("");
 		} else {
 			messagesArea.setText("You have to select a student to update");//Error message to the user
 		}
@@ -98,13 +98,13 @@ public class Controller {
 		messagesArea.setText("");
 		String student = (String) pickStudent.getValue();//The selected value/student in the student list
 		if(student != null) {
-			String studentId = student.substring(student.length() - 6, student.length());			
+			String studentId = student.substring(student.length() - 6, student.length());
 			studentRegister.removeStudent(studentId); //Remove student from DB
 			this.updateStudentList(studentRegister.getStudents());
 			messagesArea.setText(student + " was removed from students");
 		} else {
 			messagesArea.setText("You have to select a student to delete");
-		}		
+		}
 	}
 	//The three methods below are the same as for student above
 	//1
@@ -131,9 +131,31 @@ public class Controller {
 			messagesArea.setText("The name is too short");
 			return;
 		}
-		if(course != null) {
-			String courseId = course.substring(course.length() - 6, course.length());
-			courseRegister.updateCourse(courseId, newName);
+		@FXML public void removeStudent() {
+			messagesArea.setText("");
+			String student = (String) pickStudent.getValue();//The selected value/student in the student list
+			if(student != null) {
+				String studentId = student.substring(student.length() - 6, student.length());
+				studentRegister.removeStudent(studentId); //Remove student from DB
+				this.updateStudentList(studentRegister.getStudents());
+				messagesArea.setText(student + " was removed from students");
+			} else {
+				messagesArea.setText("You have to select a student to delete");
+			}
+		}
+		//The three methods below are the same as for student above
+		//1
+		@FXML public void addCourse(ActionEvent event) {
+			messagesArea.setText("");
+			this.addLocations();
+			String newName = courseNameText.getText();
+			if(newName.length() < 2) {
+				messagesArea.setText("The name is too short");
+				return;
+			}
+			Course newCourse = new Course(newName, courseRegister);
+			courseRegister.addCourse(newCourse);
+			messagesArea.setText("The course " + newCourse.getName()+ " with course code " +  newCourse.getCourseCode() + " har skapats!");
 			this.updateCourseList(courseRegister.getCourses());
 			messagesArea.setText("The course has changed name to " + newName);
 			courseNameText.setText("");
@@ -145,14 +167,14 @@ public class Controller {
 	@FXML public void removeCourse() {
 		String course = (String) pickCourse.getValue();
 		if(course != null) {
-			String courseId = course.substring(course.length() - 6, course.length());			
+			String courseId = course.substring(course.length() - 6, course.length());
 			courseRegister.removeCourse(courseId);
 			this.updateCourseList(courseRegister.getCourses());
 			this.updateExamList();
 			messagesArea.setText(course + " was removed from courses");
 		} else {
 			messagesArea.setText("You have to select a course to delete");
-		}		
+		}
 	}
 	//Add an exam to a course
 	@FXML public void addExam() {
@@ -171,9 +193,9 @@ public class Controller {
 		this.updateExamList();//Update the exam list to make it possible for the user to select it
 		messagesArea.setText("Exam was added to the course"); //Exam added successfully message to the user
 	}
-	
+
 	//Same principles like above
-	@FXML public void removeExam() { 
+	@FXML public void removeExam() {
 		messagesArea.setText("");
 		String course = (String) pickCourse.getValue();
 		String exam = (String) pickExam.getValue();
@@ -181,54 +203,94 @@ public class Controller {
 			messagesArea.setText("You have to pick a course to remove an exam");
 			return;
 		}
-		String courseId = course.substring(course.length() - 6, course.length());
-		String examId = exam.substring(0, 6);
-		Course selectedCourse = courseRegister.findCourse(courseId);
-		selectedCourse.removeExam(examId);
-		this.updateExamList();
-		messagesArea.setText(examId + " was removed from " + courseId);
-	}
-	
-	
-	
-	@FXML public void addResult() {
-		messagesArea.setText("");
-		int credits = 0;
-		String examString = (String) this.pickExam.getValue();
-		String studentString = (String) this.pickStudent.getValue();
-		if(examString == null || studentString == null) {
-			messagesArea.setText("You have to select a student and an exam to add result");
-			return;
+		//Add an exam to a course
+		@FXML public void addExam() {
+			messagesArea.setText("");
+			String course = (String) pickCourse.getValue();//Get value/course from the course list
+			String location = (String) pickLocation.getValue();//Get value/location from the location list
+			//If no course or location is selected in the list, the user gets a error message
+			if(course == null || location == null) {
+				messagesArea.setText("You have to pick a course and a location to add an exam");
+				return;//terminate method
+			}
+			String courseId = course.substring(course.length() - 6, course.length());
+			Course selectedCourse = courseRegister.findCourse(courseId);//Get the course the user selected
+			WrittenExam newExam = new WrittenExam(location, selectedCourse);//Create exam
+			selectedCourse.addWrittenExam(newExam);//Add exam to the course the user selected
+			this.updateExamList();//Update the exam list to make it possible for the user to select it
+			messagesArea.setText("Exam was added to the course"); //Exam added successfully message to the user
 		}
 		//Check if the user input is able to be turned in to a in. No letters allowed as input
 		try {
 			credits = Integer.parseInt(resultText.getText());
 		} catch(Error err) {
-			messagesArea.setText("The result must be a number between 0 and 100");//Errormessage 
+			messagesArea.setText("The result must be a number between 0 and 100");//Errormessage
 		}
-		if(credits >= 0 && credits <= 100) {
-			messagesArea.setText("Grade: " + this.calculateGrade(credits) + "  Credits: " + credits);
-		} else {
-			messagesArea.setText("Write a number between 0 and 100");
+
+
+
+		@FXML public void addResult() {
+			messagesArea.setText("");
+			int credits = 0;
+			String examString = (String) this.pickExam.getValue();
+			String studentString = (String) this.pickStudent.getValue();
+			if(examString == null || studentString == null) {
+				messagesArea.setText("You have to select a student and an exam to add result");
+				return;
+			}
+			//Check if the user input is able to be turned in to a in. No letters allowed as input
+			try {
+				credits = Integer.parseInt(resultText.getText());
+			} catch(Error err) {
+				messagesArea.setText("The result must be a number between 0 and 100");//Errormessage
+			}
+			if(credits >= 0 && credits <= 100) {
+				messagesArea.setText("Grade: " + this.calculateGrade(credits) + "  Credits: " + credits);
+			} else {
+				messagesArea.setText("Write a number between 0 and 100");
+			}
+			String studentId = studentString.substring(studentString.length() - 6, studentString.length());
+			String examId = examString.substring(0, 6);
+			Student student = studentRegister.findStudent(studentId);
+			WrittenExam exam = courseRegister.findWrittenExam(examId);
+			Result result = new Result(student, exam, credits, this.calculateGrade(credits));//Turn the points into a grade with local method calculateGrade()
+			student.addResult(result);
+			messagesArea.setText("Grade " + this.calculateGrade(credits) + " (" + credits + " points) was registered for " + student.getName() + " on exam " + examId);
+			resultText.setText("");
+
+			}
+
+		//Shows all results for student, even on removed exams
+		@FXML public void showResults() {
+			messagesArea.setText("");
+			String studentString = (String) pickStudent.getValue();//Selected student
+			if(studentString == null) {
+				messagesArea.setText("You have to pick a student to show results for");
+				return;
+			}
+			String studentId = studentString.substring(studentString.length() - 6, studentString.length());
+			Student student = studentRegister.findStudent(studentId);
+			if(student != null) {
+				messagesArea.setText("Results for student " + student.getName() + "\n");//Headline
+				//For every exam the student has taken show grade, course, exam, points
+				for(Result result: student.getResults()) {
+					messagesArea.setText(messagesArea.getText() + "\n Exam: " + result.getExam().getExamID() + "  Course: " + result.getExam().getCourse().getName() + "  Grade: " + result.getGrade() + "  Points: " + result.getPoints());
+				}
+			}
 		}
-		String studentId = studentString.substring(studentString.length() - 6, studentString.length());
-		String examId = examString.substring(0, 6);
-		Student student = studentRegister.findStudent(studentId);
-		WrittenExam exam = courseRegister.findWrittenExam(examId);
-		Result result = new Result(student, exam, credits, this.calculateGrade(credits));//Turn the points into a grade with local method calculateGrade()
-		student.addResult(result);
-		messagesArea.setText("Grade " + this.calculateGrade(credits) + " (" + credits + " points) was registered for " + student.getName() + " on exam " + examId);
-		resultText.setText("");
-			
-		}
-	
-	//Shows all results for student, even on removed exams
-	@FXML public void showResults() {
-		messagesArea.setText("");
-		String studentString = (String) pickStudent.getValue();//Selected student
-		if(studentString == null) {
-			messagesArea.setText("You have to pick a student to show results for");
-			return;
+		//Turn points into grade
+
+
+		//To be able to show the list of students
+		//we have to turn the array list of type Student to an array list of type String
+		public ArrayList<String> studentsToStrings(ArrayList<Student> students) {
+			ArrayList<String> stringStudents = new ArrayList<String>();//Array list to be displayed in the list
+			//Make the string to be displayed in the list and add it to the list for every student in the db/register
+			for(Student s: students) {
+				String studentString = "Name: " + s.getName() + ", Id: " + s.getStudentId();
+				stringStudents.add(studentString);
+			}
+			return stringStudents;
 		}
 		String studentId = studentString.substring(studentString.length() - 6, studentString.length());
 		Student student = studentRegister.findStudent(studentId);
@@ -241,9 +303,9 @@ public class Controller {
 		}
 	}
 	//Turn points into grade
-	
-	
-	//To be able to show the list of students 
+
+
+	//To be able to show the list of students
 	//we have to turn the array list of type Student to an array list of type String
 	public ArrayList<String> studentsToStrings(ArrayList<Student> students) {
 		ArrayList<String> stringStudents = new ArrayList<String>();//Array list to be displayed in the list
@@ -286,7 +348,21 @@ public class Controller {
 		} else if(credits < 100) {
 			return "A";
 		}
-		return "F";
-	}	
-	
+		public String calculateGrade(int credits) {
+			if(credits < 50) {
+				return "F";
+			} else if(credits < 55) {
+				return "G";
+			} else if(credits < 65) {
+				return "D";
+			} else if(credits < 75) {
+				return "C";
+			} else if(credits < 85) {
+				return "B";
+			} else if(credits < 100) {
+				return "A";
+			}
+			return "F";
+		}
+
 }
