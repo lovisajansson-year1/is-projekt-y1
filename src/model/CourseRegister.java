@@ -38,10 +38,10 @@ public class CourseRegister {
 		return null;
 
 	}
-	public WrittenExam findWrittenExam(String writtenExamId) {
+	public WrittenExam findWrittenExam(String examId) {
 		for(Course course: this.courses) {
 			for(WrittenExam exam: course.getWrittenExams() ) {
-				if(exam.getExamID()==(writtenExamId)) {
+				if(exam.getExamID()==(examId)) {
 					return exam;
 				}
 			}

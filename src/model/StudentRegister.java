@@ -39,8 +39,8 @@ public ArrayList<Student> getStudents() {
 	  Student s = this.findStudent(studentId);
 	  s.setName(newName);
   }
- public void addStudent(Student tmp) {
-	 this.students.add(tmp);
+ public void addStudent(Student student) {
+	 this.students.add(student);
  }
 //skriver ut namn på studenter
  public void printStudents() {
