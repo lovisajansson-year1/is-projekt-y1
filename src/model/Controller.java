@@ -26,8 +26,16 @@ public class Controller {
 	@FXML private ComboBox pickLocation;//Currently selected location
 	@FXML private TextArea messagesArea;//Shows error messages and responses to the user interaction with the interface
 
-	StudentRegister studentRegister = new StudentRegister();
-	CourseRegister courseRegister = new CourseRegister();
+	private StudentRegister studentRegister = new StudentRegister();
+	private CourseRegister courseRegister = new CourseRegister();
+	
+	public void setStudentRegister(StudentRegister s) {
+		this.studentRegister = s;
+	}
+	
+	public StudentRegister getStudentRegister() {
+		return this.studentRegister;
+	}
 	
 	//Updates the list of students whenever a student is added, removed or updated
 		public void updateStudentList(ArrayList<Student> students) {

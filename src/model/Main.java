@@ -7,13 +7,23 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+	static Controller controller;
 @Override
-
 	public void start(Stage primaryStage) {
 		try {
-			Parent root = FXMLLoader.load(this.getClass().getResource("main.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml"));
+			Parent root = loader.load();
 			Scene scene = new Scene(root);
+			controller = (Controller) loader.getController();  
 			
+			
+			//Test data
+			Student marc = new Student("Marc", controller.getStudentRegister());
+			Student lovisa = new Student("Lovisa", controller.getStudentRegister());
+			controller.getStudentRegister().addStudent(marc);
+			controller.getStudentRegister().addStudent(lovisa);
+			controller.updateStudentList(controller.getStudentRegister().getStudents());
+					
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 	
 			primaryStage.setScene(scene);
@@ -22,11 +32,11 @@ public class Main extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+
 	}//End start
 	public static void main(String[] args) {
 		launch(args);
-		StudentRegister register = new StudentRegister();
-		Student lovisa = new Student("lovisa", register );
+		
 	}
 	
 }
