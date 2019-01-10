@@ -14,7 +14,6 @@ public class Course {
 		this.name = name;
 		this.courseRegister = courseRegister;
 		this.courseCode = this.generateCourseCode(courseRegister);
-		courseRegister.addCourse(this);
 	}
 
 	

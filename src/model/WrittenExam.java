@@ -4,6 +4,9 @@ package model;
 
 import java.util.ArrayList;
 
+import copy.Course;
+import copy.WrittenExam;
+
 
 public class WrittenExam {
 
@@ -18,10 +21,7 @@ public class WrittenExam {
         this.examID = this.generateExamId(course);
         this.location = location;
         this.setCourse(course);
-        course.addWrittenExam(this);
         this.maxPoints = 100;
-       
-        
     }
 
     public WrittenExam() {
@@ -31,18 +31,20 @@ public class WrittenExam {
 	public String getExamID() {
         return examID;
     }
-
-       
-    public String generateExamId(Course course) {
+ 
+	public String generateExamId(Course course) {
+		ArrayList<Course> allCourses = course.getCourseRegister().getCourses();
 		ArrayList<WrittenExam> exams = course.getWrittenExams();
 		String newId;
 		for(int i=10000+exams.size(); i<100000; i++) {
 			newId = "E" + Integer.toString(i);
-			for(WrittenExam e: exams) {
-				if(e.getExamID().equals(newId)) {
-					newId = null;
-					break;
-				}
+			for(Course c: allCourses) {
+				for(WrittenExam e: c.getWrittenExams()) {
+					if(e.getExamID().equals(newId)) {
+						newId = null;
+						break;
+					}
+				}				
 			}
 			if(newId != null) {
 				return this.examID = newId;
@@ -50,9 +52,7 @@ public class WrittenExam {
 		}
 		return null;
 	}
-
-
-    
+ 
     public String getLocation() {
         return location;
     }
@@ -60,8 +60,6 @@ public class WrittenExam {
     public void setLocation(String location) {
         this.location = location;
     }
-
-   
 
     public int getMaxPoints() {
         return maxPoints;

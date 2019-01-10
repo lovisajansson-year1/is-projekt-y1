@@ -13,8 +13,8 @@ public class Student {
 		this.name = name;
 		this.register = register;
 		this.studentId = this.generateStudentId(register);
-		register.addStudent(this);
 	}
+	
 	public String getStudentId() {
 		return studentId;
 	}
