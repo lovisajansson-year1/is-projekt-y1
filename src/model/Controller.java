@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import model.Result;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,8 +27,20 @@ public class Controller {
 	@FXML private ComboBox pickLocation;//Currently selected location
 	@FXML private TextArea messagesArea;//Shows error messages and responses to the user interaction with the interface
 
-	StudentRegister studentRegister = new StudentRegister();
-	CourseRegister courseRegister = new CourseRegister();
+	private StudentRegister studentRegister = new StudentRegister();
+	private CourseRegister courseRegister = new CourseRegister();
+
+	public void setStudentRegister(StudentRegister s) {
+		this.studentRegister = s;
+	}
+
+	public StudentRegister getStudentRegister() {
+		return this.studentRegister;
+	}
+
+	public CourseRegister getCourseRegister() {
+		return this.courseRegister;
+	}
 
 	//Updates the list of students whenever a student is added, removed or updated
 	public void updateStudentList(ArrayList<Student> students) {
@@ -143,19 +156,24 @@ public class Controller {
 				messagesArea.setText("You have to select a student to delete");
 			}
 		}
-		//The three methods below are the same as for student above
-		//1
-		@FXML public void addCourse(ActionEvent event) {
-			messagesArea.setText("");
-			this.addLocations();
-			String newName = courseNameText.getText();
-			if(newName.length() < 2) {
-				messagesArea.setText("The name is too short");
-				return;
-			}
-			Course newCourse = new Course(newName, courseRegister);
-			courseRegister.addCourse(newCourse);
-			messagesArea.setText("The course " + newCourse.getName()+ " with course code " +  newCourse.getCourseCode() + " har skapats!");
+		Course newCourse = new Course(newName, courseRegister);
+		courseRegister.addCourse(newCourse);
+		messagesArea.setText("The course " + newCourse.getName()+ " with course code " +  newCourse.getCourseCode() + " har skapats!");
+		this.updateCourseList(courseRegister.getCourses());
+		courseNameText.setText("");
+	}
+	//2
+	@FXML public void updateCourse() {
+		messagesArea.setText("");
+		String course = (String) pickCourse.getValue();
+		String newName = courseNameText.getText();
+		if(newName.length() < 2) {
+			messagesArea.setText("The name is too short");
+			return;
+		}
+		if(course != null) {
+			String courseId = course.substring(course.length() - 6, course.length());
+			courseRegister.updateCourse(courseId, newName);
 			this.updateCourseList(courseRegister.getCourses());
 			messagesArea.setText("The course has changed name to " + newName);
 			courseNameText.setText("");
@@ -203,22 +221,24 @@ public class Controller {
 			messagesArea.setText("You have to pick a course to remove an exam");
 			return;
 		}
-		//Add an exam to a course
-		@FXML public void addExam() {
-			messagesArea.setText("");
-			String course = (String) pickCourse.getValue();//Get value/course from the course list
-			String location = (String) pickLocation.getValue();//Get value/location from the location list
-			//If no course or location is selected in the list, the user gets a error message
-			if(course == null || location == null) {
-				messagesArea.setText("You have to pick a course and a location to add an exam");
-				return;//terminate method
-			}
-			String courseId = course.substring(course.length() - 6, course.length());
-			Course selectedCourse = courseRegister.findCourse(courseId);//Get the course the user selected
-			WrittenExam newExam = new WrittenExam(location, selectedCourse);//Create exam
-			selectedCourse.addWrittenExam(newExam);//Add exam to the course the user selected
-			this.updateExamList();//Update the exam list to make it possible for the user to select it
-			messagesArea.setText("Exam was added to the course"); //Exam added successfully message to the user
+		String courseId = course.substring(course.length() - 6, course.length());
+		String examId = exam.substring(0, 6);
+		Course selectedCourse = courseRegister.findCourse(courseId);
+		selectedCourse.removeExam(examId);
+		this.updateExamList();
+		messagesArea.setText(examId + " was removed from " + courseId);
+	}
+
+
+
+	@FXML public void addResult() {
+		messagesArea.setText("");
+		int credits = 0;
+		String examString = (String) this.pickExam.getValue();
+		String studentString = (String) this.pickStudent.getValue();
+		if(examString == null || studentString == null) {
+			messagesArea.setText("You have to select a student and an exam to add result");
+			return;
 		}
 		//Check if the user input is able to be turned in to a in. No letters allowed as input
 		try {
@@ -255,6 +275,7 @@ public class Controller {
 			WrittenExam exam = courseRegister.findWrittenExam(examId);
 			Result result = new Result(student, exam, credits, this.calculateGrade(credits));//Turn the points into a grade with local method calculateGrade()
 			student.addResult(result);
+
 			messagesArea.setText("Grade " + this.calculateGrade(credits) + " (" + credits + " points) was registered for " + student.getName() + " on exam " + examId);
 			resultText.setText("");
 
@@ -290,7 +311,6 @@ public class Controller {
 				String studentString = "Name: " + s.getName() + ", Id: " + s.getStudentId();
 				stringStudents.add(studentString);
 			}
-			return stringStudents;
 		}
 		String studentId = studentString.substring(studentString.length() - 6, studentString.length());
 		Student student = studentRegister.findStudent(studentId);
@@ -348,20 +368,19 @@ public class Controller {
 		} else if(credits < 100) {
 			return "A";
 		}
-		public String calculateGrade(int credits) {
-			if(credits < 50) {
-				return "F";
-			} else if(credits < 55) {
-				return "G";
-			} else if(credits < 65) {
-				return "D";
-			} else if(credits < 75) {
-				return "C";
-			} else if(credits < 85) {
-				return "B";
-			} else if(credits < 100) {
-				return "A";
-			}
+		return stringCourses;
+	}
+	//Same for Exams
+	public ArrayList<String> examsToStrings(ArrayList<WrittenExam> exams) {
+		ArrayList<String> stringExams = new ArrayList<String>();
+		for(WrittenExam e: exams) {
+			String examString = e.getExamID() + ", Location: " + e.getLocation() + " course: " + e.getCourse().getCourseCode();
+			stringExams.add(examString);
+		}
+		return stringExams;
+	}
+	public String calculateGrade(int credits) {
+		if(credits < 50) {
 			return "F";
 		}
 

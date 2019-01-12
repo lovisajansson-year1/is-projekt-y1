@@ -8,8 +8,6 @@ public class CourseRegister {
 	private ArrayList<Course> courses = new ArrayList<Course>();
 	private String name;
 
-
-
 	public String getName() {
 		return name;
 	}
@@ -38,10 +36,10 @@ public class CourseRegister {
 		return null;
 
 	}
-	public WrittenExam findWrittenExam(String writtenExamId) {
+	public WrittenExam findWrittenExam(String examId) {
 		for(Course course: this.courses) {
 			for(WrittenExam exam: course.getWrittenExams() ) {
-				if(exam.getExamID()==(writtenExamId)) {
+				if(exam.getExamID().equals(examId)) {
 					return exam;
 				}
 			}
@@ -68,5 +66,7 @@ public class CourseRegister {
 			System.out.println(tmp.getName());
 		}
 	}
+	
+
 
 	}

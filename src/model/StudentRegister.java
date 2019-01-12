@@ -2,14 +2,14 @@ package model;
 import java.util.ArrayList;
 
 public class StudentRegister{
-  private String namn;
+  private String name;
   private ArrayList<Student> students = new ArrayList<Student>();
 
-  public String getNamn() {
-	return namn;
+  public String getName() {
+	return name;
 }
-public void setNamn(String namn) {
-	this.namn = namn;
+public void setName(String name) {
+	this.name = name;
 }
 public void setStudents(ArrayList<Student> students) {
 	this.students = students;
@@ -39,8 +39,8 @@ public ArrayList<Student> getStudents() {
 	  Student s = this.findStudent(studentId);
 	  s.setName(newName);
   }
- public void addStudent(Student tmp) {
-	 this.students.add(tmp);
+ public void addStudent(Student student) {
+	 this.students.add(student);
  }
 //skriver ut namn på studenter
  public void printStudents() {

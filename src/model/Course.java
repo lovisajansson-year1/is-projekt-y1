@@ -14,7 +14,6 @@ public class Course {
 		this.name = name;
 		this.courseRegister = courseRegister;
 		this.courseCode = this.generateCourseCode(courseRegister);
-		courseRegister.addCourse(this);
 	}
 
 	
@@ -45,8 +44,8 @@ public class Course {
 		System.out.println(writtenExams.size());
 	}
 	// genererar kursid och checkar så att det inte redan finns
-	public String generateCourseCode(CourseRegister courses) {
-		ArrayList<Course> course = courses.getCourses();
+	public String generateCourseCode(CourseRegister courseRegister) {
+		ArrayList<Course> course = courseRegister.getCourses();
 		String newCode;
 		for(int i=10000+course.size(); i<100000; i++) {
 			newCode = "C" + Integer.toString(i);

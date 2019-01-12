@@ -41,7 +41,7 @@ public class Result {
 		this.student = student;
 	}
 	public WrittenExam getExam() {
-		return exam;
+		return this.exam;
 	}
 	public void setExam(WrittenExam exam) {
 		this.exam = exam;
