@@ -2,10 +2,11 @@ package model;
 
 
 
-import java.util.ArrayList;
 
-import copy.Course;
-import copy.WrittenExam;
+import java.util.ArrayList;
+//import copy.Course;
+//import copy.WrittenExam;
+import java.util.Collections;
 
 
 public class WrittenExam {
@@ -16,13 +17,43 @@ public class WrittenExam {
     private ArrayList<Result> results = new ArrayList<Result>();
     private Course course;
 
-    //skapa ett exam för en plats och kurs samt dubbelkoppla till kurs.
+    //skapa ett exam fï¿½r en plats och kurs samt dubbelkoppla till kurs.
     public WrittenExam (String location, Course course) {
         this.examID = this.generateExamId(course);
         this.location = location;
         this.setCourse(course);
         this.maxPoints = 100;
     }
+    
+    public double getAverage() {
+    	double av = 0;
+    	if(results.size() > 0) {
+	    	for (Result res : results) {
+	    		av = av + res.getPoints();
+	    	}
+	    	av = av/getResults().size();
+    	}
+        return av;
+    }
+    
+    public double getMedian() {
+    	double med = 0;
+    	ArrayList<Double> sortedResults = new ArrayList();
+    	for(Result x : results) sortedResults.add((double) x.getPoints());
+    	Collections.sort(sortedResults);
+    	if(sortedResults.size() > 0) {
+    		if(sortedResults.size() % 2 == 0) {
+    			double med1 = sortedResults.get((int)(results.size()/2)); 
+    			double med2 = sortedResults.get((int)(results.size()/2)-1);
+    			med = (med1+med2) / 2;
+    		} else {
+    			med = sortedResults.get((int)((results.size()/2)+0.5)); 
+    		}
+    	}
+		return med;
+    }
+    
+    
 
     public WrittenExam() {
 		// TODO Auto-generated constructor stub

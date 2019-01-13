@@ -15,6 +15,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 public class Controller {
 
@@ -26,7 +28,8 @@ public class Controller {
 	@FXML private ComboBox pickExam;//Currently selected exam
 	@FXML private ComboBox pickLocation;//Currently selected location
 	@FXML private TextArea messagesArea;//Shows error messages and responses to the user interaction with the interface
-
+	
+	NumberFormat formatter = new DecimalFormat("#0.00");
 	private StudentRegister studentRegister = new StudentRegister();
 	private CourseRegister courseRegister = new CourseRegister();
 	
@@ -227,6 +230,7 @@ public class Controller {
 			WrittenExam exam = courseRegister.findWrittenExam(examId);
 			Result result = new Result(student, exam, credits, this.calculateGrade(credits));//Turn the points into a grade with local method calculateGrade()
 			student.addResult(result);
+			exam.addResult(result);
 
 			messagesArea.setText("Grade " + this.calculateGrade(credits) + " (" + credits + " points) was registered for " + student.getName() + " on exam " + examId);
 			resultText.setText("");
@@ -253,7 +257,8 @@ public class Controller {
 
 			for(Result r: student.getResults()) {
 				WrittenExam exam = r.getExam();
-				messagesArea.setText(messagesArea.getText() + "\n Exam: " + exam.getExamID() + "  Course: " + exam.getCourse().getName() + "  Grade: " + r.getGrade() + "  Points: " + r.getPoints());
+				messagesArea.setText(messagesArea.getText() + "\n Exam: " + exam.getExamID() + "  Course: " + exam.getCourse().getName() + "  Grade: " + r.getGrade() + "  Points: " + r.getPoints() 
+				+ "  Exam Average: " + formatter.format(exam.getAverage()) + "  Exam Median: " + formatter.format(exam.getMedian()));
 			}
 		}
 
