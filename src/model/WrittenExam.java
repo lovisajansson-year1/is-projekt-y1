@@ -93,12 +93,10 @@ public class WrittenExam {
     }
 
     public int getMaxPoints() {
-        return maxPoints;
+        return MAX_VALUE;
     }
 
-    public void setMaxPoints(int maxPoints) {
-        this.maxPoints = maxPoints;
-    }
+   
 
 	public ArrayList<Result> getResults() {
 		return results;
