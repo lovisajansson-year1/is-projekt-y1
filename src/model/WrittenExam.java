@@ -36,6 +36,7 @@ public class WrittenExam {
     	}
         return av;
     }
+    
 
     public double getMedian() {
     	double med = 0;
@@ -52,6 +53,26 @@ public class WrittenExam {
     		}
     	}
 		return med;
+    }
+    
+    public double passed() {
+    	int count = 0;
+    	if(results.size() > 0) {
+    		for(Result x : results) {
+    			if(x.getPoints() >= 50) {
+    				count += 1;
+    			}
+    		}
+    	}
+    	return count;
+    }
+    
+    public double passPercentage() {
+    	if (results.size() > 0) {
+    		return 100 *( ((double)passed()) / results.size()) ;
+    	} else {
+    		return 69;
+    	}
     }
 
 
