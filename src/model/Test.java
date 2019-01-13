@@ -13,21 +13,24 @@ public class Test {
 		studentRegister.printStudent(marc);
 		studentRegister.updateStudent(marc.getStudentId(), "lovisa");
 		studentRegister.printStudent(marc);
+		studentRegister.removeStudent(marc.getStudentId());
+		System.out.println("number of students in register: " + studentRegister.getStudents().size());
 		
 		Course sysa = new Course("Systemvetenskap", courseRegister);
 		courseRegister.addCourse(sysa);
 		courseRegister.printCourse(sysa);
 		courseRegister.updateCourse(sysa.getCourseCode(), "sysa2");
 		courseRegister.printCourse(sysa);
+		courseRegister.removeCourse(sysa.getCourseCode());
+		System.out.println("number of courses in register: " + courseRegister.getCourses().size());
 		
 		WrittenExam exam = new WrittenExam("Room 1", sysa);
-		sysa.addWrittenExam(exam);
-		sysa.printExams();
+		System.out.println("number of exams for course: " + sysa.getWrittenExams().size());
 		sysa.removeExam(exam.getExamID());
-		sysa.printExams();
+		System.out.println("number of exams for course: " + sysa.getWrittenExams().size());
 
 		Result result = new Result(marc,exam,55);
-		System.out.println(marc.getResults().size());
+		System.out.println("number of results for " + marc.getName() + ": " + marc.getResults().size());
 		
 	}
 

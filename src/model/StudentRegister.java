@@ -46,15 +46,15 @@ public ArrayList<Student> getStudents() {
 	 
 	if(this.findStudent(student.getStudentId())!=null) {
 			try {
-				System.out.println("Namn på student: " + student.getName());
+				System.out.println("Name: " + student.getName());
 				
 			} catch (NullPointerException ingetNamn) {
-				System.out.println(" Studenten har inget namn!");
+				System.out.println("Student has no name");
 			}
 			try {
 				System.out.println("StudentId: " + student.getStudentId());
 			} catch(NullPointerException ingetId) {
-				System.out.println(" Studenten har inget ID! ");
+				System.out.println("Student has not ID! ");
 			}
  		}
  	else {

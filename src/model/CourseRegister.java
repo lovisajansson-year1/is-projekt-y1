@@ -63,18 +63,18 @@ public class CourseRegister {
 	public void printCourse(Course course) {
 		 
 		if(this.findCourse(course.getCourseCode())!=null) {
-				try {
-					System.out.println("Course name: " + course.getName());
-					
-				} catch (NullPointerException ingetNamn) {
-					System.out.println(" Course doesn't have a name!");
-				}
-				try {
-					System.out.println("Course code: " + course.getCourseCode());
-				} catch(NullPointerException ingetId) {
-					System.out.println(" Course doesn't have a code ");
-				}
-	 		}
+			try {
+				System.out.println("Course name: " + course.getName());
+				
+			} catch (NullPointerException ingetNamn) {
+				System.out.println(" Course doesn't have a name!");
+			}
+			try {
+				System.out.println("Course code: " + course.getCourseCode());
+			} catch(NullPointerException ingetId) {
+				System.out.println(" Course doesn't have a code ");
+			}
+ 		}
 	 	else {
 	 		System.out.println("Course doesn't exist in the course register");
 	 	}

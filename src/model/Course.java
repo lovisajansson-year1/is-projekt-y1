@@ -94,13 +94,4 @@ public class Course {
 	public void setCredits(double credits) {
 		this.credits = credits;
 	}
-	public void printExams() {
-		if(writtenExams.size()>0) {
-			for(WrittenExam tmp: writtenExams) {
-			System.out.println(tmp.getExamID());
-			}
-		}else {
-		System.out.println("The course doesn't have any exams.");
-		}
 	}
-}
