@@ -245,7 +245,7 @@ public class Controller {
 			messagesArea.setText("");
 			String studentString = (String) pickStudent.getValue();//Selected student
 			if(studentString == null) {
-				messagesArea.setText("You have to pick a student to show results for");
+				messagesArea.setText("You must choose a student");
 				return;
 			}
 			String studentId = studentString.substring(studentString.length() - 6, studentString.length());
@@ -255,7 +255,10 @@ public class Controller {
 				//For every exam the student has taken show grade, course, exam, points
 				for(Result result: student.getResults()) {
 					WrittenExam exam = result.getExam();
-					messagesArea.setText(messagesArea.getText() + "\n Exam: " + exam.getExamID() + "  Course: " + exam.getCourse().getName() + "  Grade: " + result.getGrade() + "  Points: " + result.getPoints() + "  Exam Average: " + formatter.format(exam.getAverage()) + "  Exam Median: " + formatter.format(exam.getMedian()) + "  Students Passed: " + (int)exam.passed() + " (" + formatter.format(exam.passPercentage()) + "%).");
+					messagesArea.setText(messagesArea.getText() + "\nExam: " + exam.getExamID() + "  Course: [" + exam.getCourse().getName() + "]  Grade: " + result.getGrade() + "  Points: " + result.getPoints()
+					+ "\n" + 
+							"Average Result: " + formatter.format(exam.getAverage()) + "  Median Result: " + formatter.format(exam.getMedian()) + "  Students Passed: " + (int)exam.passed() + " (" + formatter.format(exam.passPercentage()) + "%). \n");
+							
 				}
 			}
 		}
