@@ -129,7 +129,7 @@ public class Controller {
 			return;
 		}
 		Course newCourse = new Course(newName, courseRegister);
-		//courseRegister.addCourse(newCourse);
+		
 		messagesArea.setText("The course " + newCourse.getName()+ " with course code " +  newCourse.getCourseCode() + " har skapats!");
 		this.updateCourseList(courseRegister.getCourses());
 		courseNameText.setText("");
@@ -179,7 +179,6 @@ public class Controller {
 		String courseId = course.substring(course.length() - 6, course.length());
 		Course selectedCourse = courseRegister.findCourse(courseId);//Get the course the user selected
 		WrittenExam newExam = new WrittenExam(location, selectedCourse);//Create exam
-		//selectedCourse.addWrittenExam(newExam);//Add exam to the course the user selected
 		this.updateExamList();//Update the exam list to make it possible for the user to select it
 		messagesArea.setText("Exam was added to the course"); //Exam added successfully message to the user
 	}
@@ -227,7 +226,7 @@ public class Controller {
 			Result result = new Result(student, exam, credits);//Turn the points into a grade with local method calculateGrade()
 			
 
-			messagesArea.setText("Grade " + this.calculateGrade(credits) + " (" + credits + " points) was registered for " + student.getName() + " on exam " + examId);
+			messagesArea.setText("Grade " + result.getGrade() + " (" + credits + " points) was registered for " + student.getName() + " on exam " + examId);
 			resultText.setText("");
 		} else {
 			messagesArea.setText("Write a number between 0 and 100");
@@ -287,20 +286,5 @@ public class Controller {
 		}
 		return stringExams;
 	}
-	public String calculateGrade(int credits) {
-		if(credits < 50) {
-			return "F";
-		} else if(credits < 55) {
-			return "G";
-		} else if(credits < 65) {
-			return "D";
-		} else if(credits < 75) {
-			return "C";
-		} else if(credits < 85) {
-			return "B";
-		} else if(credits <= 100) {
-			return "A";
-		}
-		return "F";
-	}	
+	
 }
