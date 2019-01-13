@@ -23,8 +23,9 @@ public class WrittenExam {
         this.location = location;
         this.setCourse(course);
         this.maxPoints = 100;
+        course.addWrittenExam(this);
     }
-    
+
     public double getAverage() {
     	double av = 0;
     	if(results.size() > 0) {
@@ -35,7 +36,7 @@ public class WrittenExam {
     	}
         return av;
     }
-    
+
     public double getMedian() {
     	double med = 0;
     	ArrayList<Double> sortedResults = new ArrayList();
@@ -43,17 +44,17 @@ public class WrittenExam {
     	Collections.sort(sortedResults);
     	if(sortedResults.size() > 0) {
     		if(sortedResults.size() % 2 == 0) {
-    			double med1 = sortedResults.get((int)(results.size()/2)); 
+    			double med1 = sortedResults.get((int)(results.size()/2));
     			double med2 = sortedResults.get((int)(results.size()/2)-1);
     			med = (med1+med2) / 2;
     		} else {
-    			med = sortedResults.get((int)((results.size()/2)+0.5)); 
+    			med = sortedResults.get((int)((results.size()/2)+0.5));
     		}
     	}
 		return med;
     }
-    
-    
+
+
 
     public WrittenExam() {
 		// TODO Auto-generated constructor stub
@@ -62,7 +63,7 @@ public class WrittenExam {
 	public String getExamID() {
         return examID;
     }
- 
+
 	public String generateExamId(Course course) {
 		ArrayList<Course> allCourses = course.getCourseRegister().getCourses();
 		ArrayList<WrittenExam> exams = course.getWrittenExams();
@@ -75,7 +76,7 @@ public class WrittenExam {
 						newId = null;
 						break;
 					}
-				}				
+				}
 			}
 			if(newId != null) {
 				return this.examID = newId;
@@ -83,7 +84,7 @@ public class WrittenExam {
 		}
 		return null;
 	}
- 
+
     public String getLocation() {
         return location;
     }
@@ -119,8 +120,6 @@ public class WrittenExam {
 	public void setCourse(Course course) {
 		this.course = course;
 	}
-    
+
 
 }
-
-

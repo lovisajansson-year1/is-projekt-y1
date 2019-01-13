@@ -12,11 +12,13 @@ public class Result {
 	private WrittenExam exam;
 	
 	//beräkna betyg och dubbelkoppla till student och exam
-	public Result(Student student, WrittenExam exam, int points, String grade) {
+
+	public Result(Student student, WrittenExam exam, int points) {
 		this.student = student;
 		this.exam = exam;
 		this.points = points;
-		this.grade = grade;
+		this.grade = this.calculateGrade(points);
+		student.addResult(this);
 	}
 	
 		
@@ -46,7 +48,22 @@ public class Result {
 	public void setExam(WrittenExam exam) {
 		this.exam = exam;
 	}
-	
+	public String calculateGrade(int credits) {
+		if(credits < 50) {
+			return "F";
+		} else if(credits < 55) {
+			return "G";
+		} else if(credits < 65) {
+			return "D";
+		} else if(credits < 75) {
+			return "C";
+		} else if(credits < 85) {
+			return "B";
+		} else if(credits <= 100) {
+			return "A";
+		}
+		return "F";
+	}	
 	
 	
 	

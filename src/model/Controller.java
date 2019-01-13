@@ -28,23 +28,23 @@ public class Controller {
 	@FXML private ComboBox pickExam;//Currently selected exam
 	@FXML private ComboBox pickLocation;//Currently selected location
 	@FXML private TextArea messagesArea;//Shows error messages and responses to the user interaction with the interface
-	
+
 	NumberFormat formatter = new DecimalFormat("#0.00");
 	private StudentRegister studentRegister = new StudentRegister();
 	private CourseRegister courseRegister = new CourseRegister();
-	
+
 	public void setStudentRegister(StudentRegister s) {
 		this.studentRegister = s;
 	}
-	
+
 	public StudentRegister getStudentRegister() {
 		return this.studentRegister;
 	}
-	
+
 	public CourseRegister getCourseRegister() {
 		return this.courseRegister;
 	}
-	
+
 	//Updates the list of students whenever a student is added, removed or updated
 	public void updateStudentList(ArrayList<Student> students) {
 		ObservableList<String> studentList = FXCollections
@@ -73,19 +73,18 @@ public class Controller {
 	public void addLocations() {
 		ObservableList<String> locations = FXCollections
 				.observableArrayList("Room A123", "Room A167", "Room B198", "Room B067");
-		pickLocation.setItems(locations);		
+		pickLocation.setItems(locations);
 	}
-	
+
 	@FXML public void addStudent(ActionEvent event) {
 		messagesArea.setText("");//Empties the text area in the bottom to prepare for new text
 		String newName = studentNameText.getText();//Get name from text field for student name
-		//If the user writes a name shorter than 2 characters the user gets a error message 
+		//If the user writes a name shorter than 2 characters the user gets a error message
 		if(newName.length() < 2) {
 			messagesArea.setText("The name is too short");//Error message
-			return;// Terminate method so the student isn't added to the "database" 
+			return;// Terminate method so the student isn't added to the "database"
 		}
 		Student newStudent = new Student(studentNameText.getText(), studentRegister);//Create new student to add to the DB
-		studentRegister.addStudent(newStudent);//Add to DB, method in class StudentRegister
 		//Message the user that the user was created successfully (line below)
 		messagesArea.setText("The student " + newStudent.getName()+ " with course code " +  newStudent.getStudentId() + " har skapats!");
 		this.updateStudentList(studentRegister.getStudents());//Update the list of students, with the new student added
@@ -105,7 +104,7 @@ public class Controller {
 			studentRegister.updateStudent(studentId, studentNameText.getText());//Update the user in the db/register
 			this.updateStudentList(studentRegister.getStudents());//Update the list of students
 			messagesArea.setText("The student has changed name to " + studentNameText.getText());
-			studentNameText.setText("");	
+			studentNameText.setText("");
 		} else {
 			messagesArea.setText("You have to select a student to update");//Error message to the user
 		}
@@ -114,13 +113,13 @@ public class Controller {
 		messagesArea.setText("");
 		String student = (String) pickStudent.getValue();//The selected value/student in the student list
 		if(student != null) {
-			String studentId = student.substring(student.length() - 6, student.length());			
+			String studentId = student.substring(student.length() - 6, student.length());
 			studentRegister.removeStudent(studentId); //Remove student from DB
 			this.updateStudentList(studentRegister.getStudents());
 			messagesArea.setText(student + " was removed from students");
 		} else {
 			messagesArea.setText("You have to select a student to delete");
-		}		
+		}
 	}
 	//The three methods below are the same as for student above
 	//1
@@ -133,7 +132,7 @@ public class Controller {
 			return;
 		}
 		Course newCourse = new Course(newName, courseRegister);
-		courseRegister.addCourse(newCourse);
+		//courseRegister.addCourse(newCourse);
 		messagesArea.setText("The course " + newCourse.getName()+ " with course code " +  newCourse.getCourseCode() + " har skapats!");
 		this.updateCourseList(courseRegister.getCourses());
 		courseNameText.setText("");
@@ -161,14 +160,14 @@ public class Controller {
 	@FXML public void removeCourse() {
 		String course = (String) pickCourse.getValue();
 		if(course != null) {
-			String courseId = course.substring(course.length() - 6, course.length());			
+			String courseId = course.substring(course.length() - 6, course.length());
 			courseRegister.removeCourse(courseId);
 			this.updateCourseList(courseRegister.getCourses());
 			this.updateExamList();
 			messagesArea.setText(course + " was removed from courses");
 		} else {
 			messagesArea.setText("You have to select a course to delete");
-		}		
+		}
 	}
 	//Add an exam to a course
 	@FXML public void addExam() {
@@ -183,13 +182,13 @@ public class Controller {
 		String courseId = course.substring(course.length() - 6, course.length());
 		Course selectedCourse = courseRegister.findCourse(courseId);//Get the course the user selected
 		WrittenExam newExam = new WrittenExam(location, selectedCourse);//Create exam
-		selectedCourse.addWrittenExam(newExam);//Add exam to the course the user selected
+		//selectedCourse.addWrittenExam(newExam);//Add exam to the course the user selected
 		this.updateExamList();//Update the exam list to make it possible for the user to select it
 		messagesArea.setText("Exam was added to the course"); //Exam added successfully message to the user
 	}
-	
+
 	//Same principles like above
-	@FXML public void removeExam() { 
+	@FXML public void removeExam() {
 		messagesArea.setText("");
 		String course = (String) pickCourse.getValue();
 		String exam = (String) pickExam.getValue();
@@ -204,9 +203,9 @@ public class Controller {
 		this.updateExamList();
 		messagesArea.setText(examId + " was removed from " + courseId);
 	}
-	
-	
-	
+
+
+
 	@FXML public void addResult() {
 		messagesArea.setText("");
 		int credits = 0;
@@ -228,9 +227,8 @@ public class Controller {
 			String examId = examString.substring(0, 6);
 			Student student = studentRegister.findStudent(studentId);
 			WrittenExam exam = courseRegister.findWrittenExam(examId);
-			Result result = new Result(student, exam, credits, this.calculateGrade(credits));//Turn the points into a grade with local method calculateGrade()
-			student.addResult(result);
-			exam.addResult(result);
+			Result result = new Result(student, exam, credits);//Turn the points into a grade with local method calculateGrade()
+
 
 			messagesArea.setText("Grade " + this.calculateGrade(credits) + " (" + credits + " points) was registered for " + student.getName() + " on exam " + examId);
 			resultText.setText("");
@@ -239,7 +237,7 @@ public class Controller {
 			return;
 		}
 	}
-	
+
 	//Shows all results for student, even on removed exams
 	@FXML public void showResults() {
 		messagesArea.setText("");
@@ -248,23 +246,23 @@ public class Controller {
 			messagesArea.setText("You have to pick a student to show results for");
 			return;
 		}
-		
+
 		String studentId = studentString.substring(studentString.length() - 6, studentString.length());
 		Student student = studentRegister.findStudent(studentId);
-		
+
 		if(student != null) {
 			messagesArea.setText("Results for student " + student.getName() + "\n");//Headline
 
 			for(Result r: student.getResults()) {
 				WrittenExam exam = r.getExam();
-				messagesArea.setText(messagesArea.getText() + "\n Exam: " + exam.getExamID() + "  Course: " + exam.getCourse().getName() + "  Grade: " + r.getGrade() + "  Points: " + r.getPoints() 
+				messagesArea.setText(messagesArea.getText() + "\n Exam: " + exam.getExamID() + "  Course: " + exam.getCourse().getName() + "  Grade: " + r.getGrade() + "  Points: " + r.getPoints()
 				+ "  Exam Average: " + formatter.format(exam.getAverage()) + "  Exam Median: " + formatter.format(exam.getMedian()));
 			}
 		}
 
-	}	
-	
-	//To be able to show the list of students 
+	}
+
+	//To be able to show the list of students
 	//we have to turn the array list of type Student to an array list of type String
 	public ArrayList<String> studentsToStrings(ArrayList<Student> students) {
 		ArrayList<String> stringStudents = new ArrayList<String>();//Array list to be displayed in the list
@@ -308,5 +306,5 @@ public class Controller {
 			return "A";
 		}
 		return "F";
-	}	
+	}
 }

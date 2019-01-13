@@ -42,9 +42,26 @@ public ArrayList<Student> getStudents() {
  public void addStudent(Student student) {
 	 this.students.add(student);
  }
-//skriver ut namn pÃ¥ studenter
- public void printStudents() {
-	 for(Student s: students) {
-		 System.out.println(s.getName());	 }
+ public void printStudent(Student student) {
+	 
+	if(this.findStudent(student.getStudentId())!=null) {
+			try {
+				System.out.println("Namn på student: " + student.getName());
+				
+			} catch (NullPointerException ingetNamn) {
+				System.out.println(" Studenten har inget namn!");
+			}
+			try {
+				System.out.println("StudentId: " + student.getStudentId());
+			} catch(NullPointerException ingetId) {
+				System.out.println(" Studenten har inget ID! ");
+			}
+ 		}
+ 	else {
+ 		System.out.println("Student doesn't exist in the student register");
+ 	}
  }
-}
+}		
+	
+ 
+

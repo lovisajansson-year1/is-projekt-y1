@@ -14,6 +14,7 @@ public class Course {
 		this.name = name;
 		this.courseRegister = courseRegister;
 		this.courseCode = this.generateCourseCode(courseRegister);
+		courseRegister.addCourse(this);
 	}
 
 	
@@ -30,19 +31,27 @@ public class Course {
 	public void addWrittenExam(WrittenExam writtenExam) {
 		this.writtenExams.add(writtenExam);
 	}
-	public void removeExam(String id) {
-		if(this.writtenExams == null) {
-			System.out.println("fel");
-			return;
-		}
-		for(WrittenExam e: this.writtenExams) {
-			System.out.println(e.getExamID());
-			if(e.getExamID().equals(id)){
-				writtenExams.remove(e);
+	public WrittenExam findExam(String examId) {
+		for(WrittenExam tmp: this.writtenExams) {
+			if(tmp.getExamID().equals(examId)) {
+				return tmp;
 			}
 		}
-		System.out.println(writtenExams.size());
+		return null;
+
 	}
+
+	public void removeExam(String id) {
+		WrittenExam tmp = this.findExam(id);
+		if(tmp!=null){
+			this.writtenExams.remove(tmp);
+		}
+		
+	}
+
+		
+		
+	
 	// genererar kursid och checkar så att det inte redan finns
 	public String generateCourseCode(CourseRegister courseRegister) {
 		ArrayList<Course> course = courseRegister.getCourses();
@@ -85,6 +94,13 @@ public class Course {
 	public void setCredits(double credits) {
 		this.credits = credits;
 	}
-
-
+	public void printExams() {
+		if(writtenExams.size()>0) {
+			for(WrittenExam tmp: writtenExams) {
+			System.out.println(tmp.getExamID());
+			}
+		}else {
+		System.out.println("The course doesn't have any exams.");
+		}
+	}
 }
