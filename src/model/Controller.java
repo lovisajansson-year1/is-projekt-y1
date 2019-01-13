@@ -230,10 +230,39 @@ public class Controller {
 			Result result = new Result(student, exam, credits);//Turn the points into a grade with local method calculateGrade()
 			exam.addResult(result);
 
-			messagesArea.setText("Grade " + this.calculateGrade(credits) + " (" + credits + " points) was registered for " + student.getName() + " on exam " + examId);
+			messagesArea.setText("Grade " + result.getGrade() + " (" + credits + " points) was registered for " + student.getName() + " on exam " + examId);
 			resultText.setText("");
 		} else {
 			messagesArea.setText("Write a number between 0 and 100");
+			return;
+		}
+	}
+
+	@FXML public void showAverage() {
+		messagesArea.setText("");
+		String examString = (String) this.pickExam.getValue();
+		if(examString == null) {
+			messagesArea.setText("You have to an exam to calculate average");
+			return;
+		}
+		String examId = examString.substring(0, 6);
+		WrittenExam exam = courseRegister.findWrittenExam(examId);
+		messagesArea.setText("The average points for this exam is: " + exam.getAverage());
+	}
+	
+	@FXML public void showMedian() {
+		messagesArea.setText("");
+		String examString = (String) this.pickExam.getValue();
+		if(examString == null) {
+			messagesArea.setText("You have to select an exam to calculate median.");
+			return;
+		}
+	}
+	@FXML public void showPassedStudents() {
+		messagesArea.setText("");
+		String examString = (String) this.pickExam.getValue();
+		if(examString == null) {
+			messagesArea.setText("You have to select an exam to show passed students.");
 			return;
 		}
 	}
@@ -291,20 +320,5 @@ public class Controller {
 		}
 		return stringExams;
 	}
-	public String calculateGrade(int credits) {
-		if(credits < 50) {
-			return "F";
-		} else if(credits < 55) {
-			return "G";
-		} else if(credits < 65) {
-			return "D";
-		} else if(credits < 75) {
-			return "C";
-		} else if(credits < 85) {
-			return "B";
-		} else if(credits <= 100) {
-			return "A";
-		}
-		return "F";
-	}
+
 }

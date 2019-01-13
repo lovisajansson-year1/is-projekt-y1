@@ -13,7 +13,7 @@ public class WrittenExam {
 
     private String examID;
     private String location;
-    private int maxPoints;
+    private final int MAX_VALUE = 100;
     private ArrayList<Result> results = new ArrayList<Result>();
     private Course course;
 
@@ -22,7 +22,6 @@ public class WrittenExam {
         this.examID = this.generateExamId(course);
         this.location = location;
         this.setCourse(course);
-        this.maxPoints = 100;
         course.addWrittenExam(this);
     }
 
