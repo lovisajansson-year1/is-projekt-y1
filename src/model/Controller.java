@@ -228,7 +228,7 @@ public class Controller {
 			Student student = studentRegister.findStudent(studentId);
 			WrittenExam exam = courseRegister.findWrittenExam(examId);
 			Result result = new Result(student, exam, credits);//Turn the points into a grade with local method calculateGrade()
-
+			exam.addResult(result);
 
 			messagesArea.setText("Grade " + result.getGrade() + " (" + credits + " points) was registered for " + student.getName() + " on exam " + examId);
 			resultText.setText("");
@@ -285,7 +285,7 @@ public class Controller {
 			for(Result r: student.getResults()) {
 				WrittenExam exam = r.getExam();
 				messagesArea.setText(messagesArea.getText() + "\n Exam: " + exam.getExamID() + "  Course: " + exam.getCourse().getName() + "  Grade: " + r.getGrade() + "  Points: " + r.getPoints()
-				+ "  Exam Average: " + formatter.format(exam.getAverage()) + "  Exam Median: " + formatter.format(exam.getMedian()));
+				+ "  Exam Average: " + formatter.format(exam.getAverage()) + "  Exam Median: " + formatter.format(exam.getMedian()) + "  Students Passed: " + exam.passed() + " (" + formatter.format(exam.passPercentage()) + "%).");
 			}
 		}
 
