@@ -1,8 +1,6 @@
 package model;
 
 
-//Ha calculateGrade(); innanför constructorn?
-//Kalla calculateGrade(); När setCredits(); blir kallad?
 
 public class Result {
 

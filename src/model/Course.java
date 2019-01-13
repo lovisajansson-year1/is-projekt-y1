@@ -22,11 +22,33 @@ public class Course {
 	public String getCourseCode() {
 		return courseCode;
 	}
+	public void setCourseCode(String courseCode) {
+		this.courseCode = courseCode;
+	}
 	public ArrayList<WrittenExam> getWrittenExams() {
 		return writtenExams;
 	}
 	public void setWrittenExams(ArrayList<WrittenExam> writtenExams) {
 		this.writtenExams = writtenExams;
+	}
+	public CourseRegister getCourseRegister() {
+		return courseRegister;
+	}
+	public void setCourseRegister(CourseRegister courseRegister) {
+		this.courseRegister = courseRegister;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public double getCredits() {
+		return credits;
+	}
+	public void setCredits(double credits) {
+		this.credits = credits;
 	}
 	public void addWrittenExam(WrittenExam writtenExam) {
 		this.writtenExams.add(writtenExam);
@@ -49,9 +71,6 @@ public class Course {
 		
 	}
 
-		
-		
-	
 	// genererar kursid och checkar så att det inte redan finns
 	public String generateCourseCode(CourseRegister courseRegister) {
 		ArrayList<Course> course = courseRegister.getCourses();
@@ -73,25 +92,5 @@ public class Course {
 
 
 
-	public CourseRegister getCourseRegister() {
-		return courseRegister;
-	}
-	public void setCourseRegister(CourseRegister courseRegister) {
-		this.courseRegister = courseRegister;
-	}
-	public void setCourseCode(String courseCode) {
-		this.courseCode = courseCode;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public double getCredits() {
-		return credits;
-	}
-	public void setCredits(double credits) {
-		this.credits = credits;
-	}
+	
 	}
