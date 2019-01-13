@@ -132,7 +132,7 @@ public class Controller {
 			return;
 		}
 		Course newCourse = new Course(newName, courseRegister);
-		//courseRegister.addCourse(newCourse);
+		
 		messagesArea.setText("The course " + newCourse.getName()+ " with course code " +  newCourse.getCourseCode() + " har skapats!");
 		this.updateCourseList(courseRegister.getCourses());
 		courseNameText.setText("");
@@ -209,7 +209,6 @@ public class Controller {
 		String courseId = course.substring(course.length() - 6, course.length());
 		Course selectedCourse = courseRegister.findCourse(courseId);//Get the course the user selected
 		WrittenExam newExam = new WrittenExam(location, selectedCourse);//Create exam
-		//selectedCourse.addWrittenExam(newExam);//Add exam to the course the user selected
 		this.updateExamList();//Update the exam list to make it possible for the user to select it
 		messagesArea.setText("Exam was added to the course"); //Exam added successfully message to the user
 	}
@@ -356,22 +355,7 @@ public class Controller {
 		}
 		return stringExams;
 	}
-	public String calculateGrade(int credits) {
-		if(credits < 50) {
-			return "F";
-		} else if(credits < 55) {
-			return "G";
-		} else if(credits < 65) {
-			return "D";
-		} else if(credits < 75) {
-			return "C";
-		} else if(credits < 85) {
-			return "B";
-		} else if(credits < 100) {
-			return "A";
-		}
-		return stringCourses;
-	}
+
 	//Same for Exams
 	public ArrayList<String> examsToStrings(ArrayList<WrittenExam> exams) {
 		ArrayList<String> stringExams = new ArrayList<String>();
@@ -381,9 +365,7 @@ public class Controller {
 		}
 		return stringExams;
 	}
-	public String calculateGrade(int credits) {
-		if(credits < 50) {
-			return "F";
-		}
+	
+
 
 }
