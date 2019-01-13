@@ -25,7 +25,45 @@ public class WrittenExam {
         course.addWrittenExam(this);
     }
 
-    public double getAverage() {
+	public String getExamID() {
+        return examID;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public int getMaxPoints() {
+        return MAX_VALUE;
+    }
+
+   
+
+	public ArrayList<Result> getResults() {
+		return results;
+	}
+
+	public void setResults(ArrayList<Result> results) {
+		this.results = results;
+	}
+
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}
+	
+    public void addResult(Result result) {
+    	this.results.add(result);
+    }
+    
+	public double getAverage() {
     	double av = 0;
     	if(results.size() > 0) {
 	    	for (Result res : results) {
@@ -39,7 +77,7 @@ public class WrittenExam {
 
     public double getMedian() {
     	double med = 0;
-    	ArrayList<Double> sortedResults = new ArrayList();
+    	ArrayList<Double> sortedResults = new ArrayList<Double>();
     	for(Result x : results) sortedResults.add((double) x.getPoints());
     	Collections.sort(sortedResults);
     	if(sortedResults.size() > 0) {
@@ -73,18 +111,7 @@ public class WrittenExam {
     		return 69;
     	}
     }
-
-
-
-    public WrittenExam() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public String getExamID() {
-        return examID;
-    }
-
-	public String generateExamId(Course course) {
+    public String generateExamId(Course course) {
 		ArrayList<Course> allCourses = course.getCourseRegister().getCourses();
 		ArrayList<WrittenExam> exams = course.getWrittenExams();
 		String newId;
@@ -105,39 +132,8 @@ public class WrittenExam {
 		return null;
 	}
 
-    public String getLocation() {
-        return location;
-    }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
 
-    public int getMaxPoints() {
-        return MAX_VALUE;
-    }
-
-   
-
-	public ArrayList<Result> getResults() {
-		return results;
-	}
-
-	public void setResults(ArrayList<Result> results) {
-		this.results = results;
-	}
-
-    public void addResult(Result result) {
-    	this.results.add(result);
-    }
-
-	public Course getCourse() {
-		return course;
-	}
-
-	public void setCourse(Course course) {
-		this.course = course;
-	}
 
 
 }
