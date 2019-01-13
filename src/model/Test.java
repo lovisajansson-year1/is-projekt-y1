@@ -9,7 +9,6 @@ public class Test {
 		CourseRegister courseRegister = new CourseRegister();
 		
 		Student marc = new Student("marc", studentRegister);
-		studentRegister.addStudent(marc);
 		studentRegister.printStudent(marc);
 		studentRegister.updateStudent(marc.getStudentId(), "lovisa");
 		studentRegister.printStudent(marc);
@@ -17,7 +16,6 @@ public class Test {
 		System.out.println("number of students in register: " + studentRegister.getStudents().size());
 		
 		Course sysa = new Course("Systemvetenskap", courseRegister);
-		courseRegister.addCourse(sysa);
 		courseRegister.printCourse(sysa);
 		courseRegister.updateCourse(sysa.getCourseCode(), "sysa2");
 		courseRegister.printCourse(sysa);
