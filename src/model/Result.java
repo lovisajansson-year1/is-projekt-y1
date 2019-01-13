@@ -20,6 +20,7 @@ public class Result {
 		this.grade = this.calculateGrade(points);
 		student.addResult(this);
 	}
+	public Result() {}
 	
 		
 
