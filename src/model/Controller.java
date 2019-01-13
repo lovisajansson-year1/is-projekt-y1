@@ -221,6 +221,7 @@ public class Controller {
 			Student student = studentRegister.findStudent(studentId);
 			WrittenExam exam = courseRegister.findWrittenExam(examId);
 			Result result = new Result();
+			
 			//Check if the user input is able to be turned in to a in. No letters allowed as input
 			try {
 				credits = Integer.parseInt(resultText.getText());
@@ -253,7 +254,8 @@ public class Controller {
 				messagesArea.setText("Results for student " + student.getName() + "\n");//Headline
 				//For every exam the student has taken show grade, course, exam, points
 				for(Result result: student.getResults()) {
-					messagesArea.setText(messagesArea.getText() + "\n Exam: " + result.getExam().getExamID() + "  Course: " + result.getExam().getCourse().getName() + "  Grade: " + result.getGrade() + "  Points: " + result.getPoints());
+					WrittenExam exam = result.getExam();
+					messagesArea.setText(messagesArea.getText() + "\n Exam: " + exam.getExamID() + "  Course: " + exam.getCourse().getName() + "  Grade: " + result.getGrade() + "  Points: " + result.getPoints() + "  Exam Average: " + formatter.format(exam.getAverage()) + "  Exam Median: " + formatter.format(exam.getMedian()) + "  Students Passed: " + (int)exam.passed() + " (" + formatter.format(exam.passPercentage()) + "%).");
 				}
 			}
 		}

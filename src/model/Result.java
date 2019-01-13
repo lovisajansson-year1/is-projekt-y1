@@ -11,7 +11,7 @@ public class Result {
 	private Student student;
 	private WrittenExam exam;
 	
-	//beräkna betyg och dubbelkoppla till student och exam
+	//berï¿½kna betyg och dubbelkoppla till student och exam
 
 	public Result(Student student, WrittenExam exam, int points) {
 		this.student = student;
@@ -19,6 +19,7 @@ public class Result {
 		this.points = points;
 		this.grade = this.calculateGrade(points);
 		student.addResult(this);
+		this.exam.addResult(this);
 	}
 	public Result() {}
 	
