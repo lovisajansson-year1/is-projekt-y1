@@ -82,7 +82,6 @@ public class Controller {
 			return;// Terminate method so the student isn't added to the "database" 
 		}
 		Student newStudent = new Student(studentNameText.getText(), studentRegister);//Create new student to add to the DB
-		studentRegister.addStudent(newStudent);//Add to DB, method in class StudentRegister
 		//Message the user that the user was created successfully (line below)
 		messagesArea.setText("The student " + newStudent.getName()+ " with course code " +  newStudent.getStudentId() + " har skapats!");
 		this.updateStudentList(studentRegister.getStudents());//Update the list of students, with the new student added
@@ -130,7 +129,7 @@ public class Controller {
 			return;
 		}
 		Course newCourse = new Course(newName, courseRegister);
-		courseRegister.addCourse(newCourse);
+		//courseRegister.addCourse(newCourse);
 		messagesArea.setText("The course " + newCourse.getName()+ " with course code " +  newCourse.getCourseCode() + " har skapats!");
 		this.updateCourseList(courseRegister.getCourses());
 		courseNameText.setText("");
@@ -180,7 +179,7 @@ public class Controller {
 		String courseId = course.substring(course.length() - 6, course.length());
 		Course selectedCourse = courseRegister.findCourse(courseId);//Get the course the user selected
 		WrittenExam newExam = new WrittenExam(location, selectedCourse);//Create exam
-		selectedCourse.addWrittenExam(newExam);//Add exam to the course the user selected
+		//selectedCourse.addWrittenExam(newExam);//Add exam to the course the user selected
 		this.updateExamList();//Update the exam list to make it possible for the user to select it
 		messagesArea.setText("Exam was added to the course"); //Exam added successfully message to the user
 	}
@@ -225,8 +224,8 @@ public class Controller {
 			String examId = examString.substring(0, 6);
 			Student student = studentRegister.findStudent(studentId);
 			WrittenExam exam = courseRegister.findWrittenExam(examId);
-			Result result = new Result(student, exam, credits, this.calculateGrade(credits));//Turn the points into a grade with local method calculateGrade()
-			student.addResult(result);
+			Result result = new Result(student, exam, credits);//Turn the points into a grade with local method calculateGrade()
+			
 
 			messagesArea.setText("Grade " + this.calculateGrade(credits) + " (" + credits + " points) was registered for " + student.getName() + " on exam " + examId);
 			resultText.setText("");

@@ -4,9 +4,6 @@ package model;
 
 import java.util.ArrayList;
 
-import copy.Course;
-import copy.WrittenExam;
-
 
 public class WrittenExam {
 
@@ -22,6 +19,7 @@ public class WrittenExam {
         this.location = location;
         this.setCourse(course);
         this.maxPoints = 100;
+        course.addWrittenExam(this);
     }
 
     public WrittenExam() {

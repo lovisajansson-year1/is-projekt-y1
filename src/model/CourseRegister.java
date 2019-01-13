@@ -59,14 +59,26 @@ public class CourseRegister {
 		Course c = this.findCourse(courseCode);
 		c.setName(newName);
   	}
-
-	//skriver ut alla kursers namn
-	public void printCourses() {
-		for(Course tmp: courses) {
-			System.out.println(tmp.getName());
-		}
-	}
 	
+	public void printCourse(Course course) {
+		 
+		if(this.findCourse(course.getCourseCode())!=null) {
+				try {
+					System.out.println("Course name: " + course.getName());
+					
+				} catch (NullPointerException ingetNamn) {
+					System.out.println(" Course doesn't have a name!");
+				}
+				try {
+					System.out.println("Course code: " + course.getCourseCode());
+				} catch(NullPointerException ingetId) {
+					System.out.println(" Course doesn't have a code ");
+				}
+	 		}
+	 	else {
+	 		System.out.println("Course doesn't exist in the course register");
+	 	}
+	 }	
 
 
 	}
