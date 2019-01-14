@@ -259,7 +259,6 @@ public class Controller {
 				+ "\n" + 
 						"Average Result: " + formatter.format(exam.getAverage()) + "  Median Result: " + formatter.format(exam.getMedian()) + "  Students Passed: " + (int)exam.passed() + " (" + formatter.format(exam.passPercentage()) + "%). \n");
 						
-			}
 		}
 	}
 		
