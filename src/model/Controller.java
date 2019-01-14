@@ -257,7 +257,7 @@ public class Controller {
 					WrittenExam exam = result.getExam();
 					messagesArea.setText(messagesArea.getText() + "\nExam: " + exam.getExamID() + "  [" + exam.getCourse().getName() + "]  Grade: " + result.getGrade() + "  Points: " + result.getPoints()
 					+ "\n" + 
-							"Average Result: " + formatter.format(exam.getAverage()) + "  Median Result: " + formatter.format(exam.getMedian()) + "  Students Passed: " + (int)exam.passed() + " (" + formatter.format(exam.passPercentage()) + "%). \n");
+							"Average Score: " + formatter.format(exam.getAverage()) + "  Median Score: " + formatter.format(exam.getMedian()) + "  Students Passed: " + (int)exam.passed() + " (" + formatter.format(exam.passPercentage()) + "%). \n");
 							
 				}
 			}
