@@ -87,7 +87,7 @@ public class Controller {
 		if(characters(newName)) {
 		Student newStudent = new Student(studentNameText.getText(), studentRegister);//Create new student to add to the DB
 		//Message the user that the user was created successfully (line below)
-		messagesArea.setText("The student " + newStudent.getName()+ " with course code " +  newStudent.getStudentId() + " has been created!");
+		messagesArea.setText("The student " + newStudent.getName()+ " with student id " +  newStudent.getStudentId() + " has been created!");
 		this.updateStudentList(studentRegister.getStudents());//Update the list of students, with the new student added
 		studentNameText.setText("");//Remove the name the user wrote from the textfield
 		} else {
@@ -140,7 +140,7 @@ public class Controller {
 		if(characters(newName)) {
 		Course newCourse = new Course(newName, courseRegister);
 
-		messagesArea.setText("The course " + newCourse.getName()+ " with course code " +  newCourse.getCourseCode() + " har skapats!");
+		messagesArea.setText("The course " + newCourse.getName()+ " with course code " +  newCourse.getCourseCode() + " has been created!");
 		this.updateCourseList(courseRegister.getCourses());
 		courseNameText.setText("");
 		} else {
