@@ -103,14 +103,16 @@ public class Controller {
 			messagesArea.setText("The name is too short");
 			return;
 		}
-		if(student != null) {
+		if(student != null && characters(newName)) {
 			String studentId = student.substring(student.length() - 6, student.length()); //Get the last 6 letters from the String student from the list
 			studentRegister.updateStudent(studentId, studentNameText.getText());//Update the user in the db/register
 			this.updateStudentList(studentRegister.getStudents());//Update the list of students
 			messagesArea.setText("The student has changed name to " + studentNameText.getText());
 			studentNameText.setText("");
-		} else {
+		} else if (student==null){
 			messagesArea.setText("You have to select a student to update");//Error message to the user
+		} else {
+			messagesArea.setText("Student name must be alphabetical");
 		}
 	}
 	@FXML public void removeStudent() {
@@ -135,11 +137,15 @@ public class Controller {
 			messagesArea.setText("The name is too short");
 			return;
 		}
+		if(characters(newName)) {
 		Course newCourse = new Course(newName, courseRegister);
 
 		messagesArea.setText("The course " + newCourse.getName()+ " with course code " +  newCourse.getCourseCode() + " har skapats!");
 		this.updateCourseList(courseRegister.getCourses());
 		courseNameText.setText("");
+		} else {
+			messagesArea.setText("Course name must be alphabetical.");
+		}
 	}
 
 
@@ -151,14 +157,16 @@ public class Controller {
 			messagesArea.setText("The name is too short");
 			return;
 		}
-		if(course != null) {
+		if(course != null && characters(newName)) {
 			String courseId = course.substring(course.length() - 6, course.length());
 			courseRegister.updateCourse(courseId, newName);
 			this.updateCourseList(courseRegister.getCourses());
 			messagesArea.setText("The course has changed name to " + newName);
 			courseNameText.setText("");
-		} else {
+		} else if (course == null){
 			messagesArea.setText("You have to select a course to update");
+		} else {
+			messagesArea.setText("Course name must be alphabetical.");
 		}
 	}
 	//3
