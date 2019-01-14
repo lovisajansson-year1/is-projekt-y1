@@ -132,13 +132,13 @@ public class Controller {
 			return;
 		}
 		Course newCourse = new Course(newName, courseRegister);
-		
+
 		messagesArea.setText("The course " + newCourse.getName()+ " with course code " +  newCourse.getCourseCode() + " har skapats!");
 		this.updateCourseList(courseRegister.getCourses());
 		courseNameText.setText("");
 	}
-		
-	
+
+
 	@FXML public void updateCourse() {
 		messagesArea.setText("");
 		String course = (String) pickCourse.getValue();
@@ -221,7 +221,7 @@ public class Controller {
 		Student student = studentRegister.findStudent(studentId);
 		WrittenExam exam = courseRegister.findWrittenExam(examId);
 		Result result = new Result();
-		
+
 		//Check if the user input is able to be turned in to a in. No letters allowed as input
 		try {
 			credits = Integer.parseInt(resultText.getText());
@@ -235,6 +235,7 @@ public class Controller {
 		} else {
 			messagesArea.setText("Write a number between 0 and 100");
 		}
+
 
 		resultText.setText("");
 
@@ -256,14 +257,14 @@ public class Controller {
 			for(Result result: student.getResults()) {
 				WrittenExam exam = result.getExam();
 				messagesArea.setText(messagesArea.getText() + "\nExam: " + exam.getExamID() + "  [" + exam.getCourse().getName() + "]  Grade: " + result.getGrade() + "  Points: " + result.getPoints()
-				+ "\n" + 
+				+ "\n" +
 						"Average Result: " + formatter.format(exam.getAverage()) + "  Median Result: " + formatter.format(exam.getMedian()) + "  Students Passed: " + (int)exam.passed() + " (" + formatter.format(exam.passPercentage()) + "%). \n");
-			}			
+			}
 		}
 	}
-		
 
-		
+
+
 	//To be able to show the list of students
 	//we have to turn the array list of type Student to an array list of type String
 	public ArrayList<String> studentsToStrings(ArrayList<Student> students) {
@@ -283,7 +284,7 @@ public class Controller {
 		}
 		return stringCourses;
 	}
-	
+
 	//Same for Exams
 	public ArrayList<String> examsToStrings(ArrayList<WrittenExam> exams) {
 		ArrayList<String> stringExams = new ArrayList<String>();
@@ -293,7 +294,7 @@ public class Controller {
 		}
 		return stringExams;
 	}
-	
+
 
 
 }
