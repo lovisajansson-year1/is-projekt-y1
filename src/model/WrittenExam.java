@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
+
 public class WrittenExam {
 
     private String examID;
@@ -17,7 +18,14 @@ public class WrittenExam {
     private ArrayList<Result> results = new ArrayList<Result>();
     private Course course;
 
-    //skapa ett exam f�r en plats och kurs samt dubbelkoppla till kurs.
+    
+    /**
+     * Create exam for a location connected to course.
+     *
+     * @param String location
+     * @param Course course
+     * @return WrittenExam
+     */
     public WrittenExam (String location, Course course) {
         this.examID = this.generateExamId(course);
         this.location = location;
@@ -25,20 +33,29 @@ public class WrittenExam {
         course.addWrittenExam(this);
     }
 
+    /**
+     * Calculates average of results for given exam.
+     *
+     * @return double average
+     */
     public double getAverage() {
-    	double av = 0;
+    	double average = 0;
     	if(results.size() > 0) {
 	    	for (Result res : results) {
-	    		av = av + res.getPoints();
+	    		average += res.getPoints();
 	    	}
-	    	av = av/getResults().size();
+	    	average = average/getResults().size();
     	}
-        return av;
+        return average;
     }
     
-
+    /**
+     * Calculates median of results for given exam.
+     *
+     * @return double median
+     */
     public double getMedian() {
-    	double med = 0;
+    	double median = 0;
     	ArrayList<Double> sortedResults = new ArrayList();
     	for(Result x : results) sortedResults.add((double) x.getPoints());
     	Collections.sort(sortedResults);
@@ -46,15 +63,20 @@ public class WrittenExam {
     		if(sortedResults.size() % 2 == 0) {
     			double med1 = sortedResults.get((int)(results.size()/2));
     			double med2 = sortedResults.get((int)(results.size()/2)-1);
-    			med = (med1+med2) / 2;
+    			median = (med1+med2) / 2;
     		} else {
-    			med = sortedResults.get((int)((results.size()/2)+0.5));
+    			median = sortedResults.get((int)((results.size()/2)+0.5));
     		}
     	}
-		return med;
+		return median;
     }
     
-    public double passed() {
+    /**
+     * The number of students who passed a given exam.
+     *
+     * @return int count
+     */
+    public int passed() {
     	int count = 0;
     	if(results.size() > 0) {
     		for(Result x : results) {
@@ -66,11 +88,16 @@ public class WrittenExam {
     	return count;
     }
     
+    /**
+     * The percentage of the students who passed the exam.
+     *
+     * @return double percentage
+     */
     public double passPercentage() {
     	if (results.size() > 0) {
     		return 100 *( ((double)passed()) / results.size()) ;
     	} else {
-    		return 69;
+    		return 0;
     	}
     }
 
