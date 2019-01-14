@@ -231,11 +231,11 @@ public class Controller {
 		if(credits >= 0 && credits <= 100) {
 			result = new Result(student, exam, credits);//Turn the points into a grade with local method calculateGrade()
 			messagesArea.setText("Grade: " + result.getGrade() + "  Credits: " + credits);
+			messagesArea.setText("Grade " + result.getGrade() + " (" + credits + " points) was registered for " + student.getName() + " on exam " + examId);
 		} else {
 			messagesArea.setText("Write a number between 0 and 100");
 		}
 
-		messagesArea.setText("Grade " + result.getGrade() + " (" + credits + " points) was registered for " + student.getName() + " on exam " + examId);
 		resultText.setText("");
 
 	}
