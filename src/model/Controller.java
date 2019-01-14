@@ -84,11 +84,15 @@ public class Controller {
 			messagesArea.setText("The name is too short");//Error message
 			return;// Terminate method so the student isn't added to the "database"
 		}
+		if(characters(newName)) {
 		Student newStudent = new Student(studentNameText.getText(), studentRegister);//Create new student to add to the DB
 		//Message the user that the user was created successfully (line below)
 		messagesArea.setText("The student " + newStudent.getName()+ " with course code " +  newStudent.getStudentId() + " has been created!");
 		this.updateStudentList(studentRegister.getStudents());//Update the list of students, with the new student added
 		studentNameText.setText("");//Remove the name the user wrote from the textfield
+		} else {
+			messagesArea.setText("The name needs to be alphabetical!");
+		}
 	}
 	//Select student in list, write new name and click update student
 	@FXML public void updateStudent() {
@@ -296,6 +300,15 @@ public class Controller {
 		return stringExams;
 	}
 
-
+	//false if non-alphabetical
+	private static boolean characters(String name) {
+	    char[] chars = name.toCharArray();
+	    for(char c : chars) {
+	    	if(Character.isDigit(c) || !Character.isAlphabetic(c)) {
+	    		return false;
+	    	}
+	    }
+	    return true;
+	}
 
 }
