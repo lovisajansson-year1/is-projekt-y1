@@ -221,12 +221,13 @@ public class Controller {
 		Student student = studentRegister.findStudent(studentId);
 		WrittenExam exam = courseRegister.findWrittenExam(examId);
 		Result result = new Result();
-		
+		String txtResult = resultText.getText();
 		//Check if the user input is able to be turned in to a in. No letters allowed as input
 		try {
-			credits = Integer.parseInt(resultText.getText());
-		} catch(Error err) {
-			messagesArea.setText("The result must be a number between 0 and 100");//Errormessage
+			credits = Integer.parseInt(txtResult);
+		} catch(NumberFormatException notNumber) {
+			messagesArea.setText("The result must be a number between 0 and 100");//Error message
+			return;
 		}
 		if(credits >= 0 && credits <= 100) {
 			result = new Result(student, exam, credits);//Turn the points into a grade with local method calculateGrade()
