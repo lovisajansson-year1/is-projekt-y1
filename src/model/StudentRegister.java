@@ -18,15 +18,6 @@ public ArrayList<Student> getStudents() {
     return this.students;
   }
 
-  public Student findStudent(String studentId) {
-    for(Student s: this.students) {
-      if(s.getStudentId().equals(studentId)) {
-        return s;
-      }
-    }
-    return null;
-  }
-
   public Student removeStudent(String studentId) {
     Student s = this.findStudent(studentId);
     if(s != null) {
@@ -61,6 +52,14 @@ public ArrayList<Student> getStudents() {
  		System.out.println("Student doesn't exist in the student register");
  	}
  }
+ public Student findStudent(String studentId) {
+	    for(Student s: this.students) {
+	      if(s.getStudentId().equals(studentId)) {
+	        return s;
+	      }
+	    }
+	    return null;
+	  }
 }		
 	
  

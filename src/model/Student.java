@@ -22,22 +22,25 @@ public class Student {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getName() {
+		return name;
+	}
 	public ArrayList<Result> getResults() {
 		return results;
 	}
 	public void setResults(ArrayList<Result> results) {
 		this.results = results;
 	}
-	public void addResult(Result result) {
-		this.results.add(result);
-	}
-
+	
 	public StudentRegister getRegister() {
 		return this.register;
 	}
 
 	public void setRegister(StudentRegister register) {
 		this.register = register;
+	}
+	public void addResult(Result result) {
+		this.results.add(result);
 	}
 
 	//Generate StudentId by comparing ids in the student register
@@ -59,9 +62,6 @@ public class Student {
 		return null;
 	}
 
-	public String getName() {
-		return name;
-	}
 				
 }
 
