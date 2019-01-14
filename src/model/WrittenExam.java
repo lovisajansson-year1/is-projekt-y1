@@ -1,11 +1,5 @@
 package model;
-
-
-
-
 import java.util.ArrayList;
-//import copy.Course;
-//import copy.WrittenExam;
 import java.util.Collections;
 
 
@@ -63,8 +57,6 @@ public class WrittenExam {
         return MAX_VALUE;
     }
 
-   
-
 	public ArrayList<Result> getResults() {
 		return results;
 	}
@@ -108,8 +100,8 @@ public class WrittenExam {
      */
     public double getMedian() {
     	double median = 0;
-    	ArrayList<Double> sortedResults = new ArrayList();
-    	for(Result x : results) sortedResults.add((double) x.getPoints());
+    	ArrayList<Double> sortedResults = new ArrayList<Double>();
+    	for(Result tmp : results) sortedResults.add((double) tmp.getPoints());
     	Collections.sort(sortedResults);
     	if(sortedResults.size() > 0) {
     		if(sortedResults.size() % 2 == 0) {
@@ -131,8 +123,8 @@ public class WrittenExam {
     public int passed() {
     	int count = 0;
     	if(results.size() > 0) {
-    		for(Result x : results) {
-    			if(x.getPoints() >= 50) {
+    		for(Result tmp : results) {
+    			if(tmp.getPoints() >= 50) {
     				count += 1;
     			}
     		}

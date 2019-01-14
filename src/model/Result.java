@@ -5,7 +5,7 @@ package model;
 public class Result {
 
 	private int points;
-	private String grade;
+	private char grade;
 	private Student student;
 	private WrittenExam exam;
 	
@@ -20,8 +20,6 @@ public class Result {
 		this.exam.addResult(this);
 	}
 	public Result() {}
-	
-		
 
 	public int getPoints() {
 		return points;
@@ -30,10 +28,10 @@ public class Result {
 		this.points = points;
 	
 	}
-	public String getGrade() {
+	public char getGrade() {
 		return grade;
 	}
-	public void setGrade(String grade) {
+	public void setGrade(char grade) {
 		this.grade = grade;
 	}
 	public Student getStudent() {
@@ -48,21 +46,21 @@ public class Result {
 	public void setExam(WrittenExam exam) {
 		this.exam = exam;
 	}
-	public String calculateGrade(int credits) {
-		if(credits < 50) {
-			return "F";
-		} else if(credits < 55) {
-			return "G";
-		} else if(credits < 65) {
-			return "D";
-		} else if(credits < 75) {
-			return "C";
-		} else if(credits < 85) {
-			return "B";
-		} else if(credits <= 100) {
-			return "A";
+	public char calculateGrade(int points) {
+		if(points < 50) {
+			return 'F';
+		} else if(points < 55) {
+			return 'G';
+		} else if(points < 65) {
+			return 'D';
+		} else if(points < 75) {
+			return 'C';
+		} else if(points < 85) {
+			return 'B';
+		} else if(points <= 100) {
+			return 'A';
 		}
-		return "F";
+		return 'F';
 	}	
 	
 	

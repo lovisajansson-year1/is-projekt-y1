@@ -207,69 +207,68 @@ public class Controller {
 
 
 
-		@FXML public void addResult() {
-			messagesArea.setText("");
-			int credits = 0;
-			String examString = (String) this.pickExam.getValue();
-			String studentString = (String) this.pickStudent.getValue();
-			if(examString == null || studentString == null) {
-				messagesArea.setText("You have to select a student and an exam to add result");
-				return;
-			}
-			String studentId = studentString.substring(studentString.length() - 6, studentString.length());
-			String examId = examString.substring(0, 6);
-			Student student = studentRegister.findStudent(studentId);
-			WrittenExam exam = courseRegister.findWrittenExam(examId);
-			Result result = new Result();
-			
-			//Check if the user input is able to be turned in to a in. No letters allowed as input
-			try {
-				credits = Integer.parseInt(resultText.getText());
-			} catch(Error err) {
-				messagesArea.setText("The result must be a number between 0 and 100");//Errormessage
-			}
-			if(credits >= 0 && credits <= 100) {
-				result = new Result(student, exam, credits);//Turn the points into a grade with local method calculateGrade()
-				messagesArea.setText("Grade: " + result.getGrade() + "  Credits: " + credits);
-			} else {
-				messagesArea.setText("Write a number between 0 and 100");
-			}
+	@FXML public void addResult() {
+		messagesArea.setText("");
+		int credits = 0;
+		String examString = (String) this.pickExam.getValue();
+		String studentString = (String) this.pickStudent.getValue();
+		if(examString == null || studentString == null) {
+			messagesArea.setText("You have to select a student and an exam to add result");
+			return;
+		}
+		String studentId = studentString.substring(studentString.length() - 6, studentString.length());
+		String examId = examString.substring(0, 6);
+		Student student = studentRegister.findStudent(studentId);
+		WrittenExam exam = courseRegister.findWrittenExam(examId);
+		Result result = new Result();
+		
+		//Check if the user input is able to be turned in to a in. No letters allowed as input
+		try {
+			credits = Integer.parseInt(resultText.getText());
+		} catch(Error err) {
+			messagesArea.setText("The result must be a number between 0 and 100");//Errormessage
+		}
+		if(credits >= 0 && credits <= 100) {
+			result = new Result(student, exam, credits);//Turn the points into a grade with local method calculateGrade()
+			messagesArea.setText("Grade: " + result.getGrade() + "  Credits: " + credits);
+		} else {
+			messagesArea.setText("Write a number between 0 and 100");
+		}
 
-			messagesArea.setText("Grade " + result.getGrade() + " (" + credits + " points) was registered for " + student.getName() + " on exam " + examId);
-			resultText.setText("");
+		messagesArea.setText("Grade " + result.getGrade() + " (" + credits + " points) was registered for " + student.getName() + " on exam " + examId);
+		resultText.setText("");
 
-			}
+	}
 
-		//Shows all results for student, even on removed exams
-		@FXML public void showResults() {
-			messagesArea.setText("");
-			String studentString = (String) pickStudent.getValue();//Selected student
-			if(studentString == null) {
-				messagesArea.setText("You must choose a student");
-				return;
-			}
-			String studentId = studentString.substring(studentString.length() - 6, studentString.length());
-			Student student = studentRegister.findStudent(studentId);
-			if(student != null) {
-				messagesArea.setText("Results for student " + student.getName() + "\n");//Headline
-				//For every exam the student has taken show grade, course, exam, points
-				for(Result result: student.getResults()) {
-					WrittenExam exam = result.getExam();
-					messagesArea.setText(messagesArea.getText() + "\nExam: " + exam.getExamID() + "  [" + exam.getCourse().getName() + "]  Grade: " + result.getGrade() + "  Points: " + result.getPoints()
-					+ "\n" + 
-							"Average Result: " + formatter.format(exam.getAverage()) + "  Median Result: " + formatter.format(exam.getMedian()) + "  Students Passed: " + (int)exam.passed() + " (" + formatter.format(exam.passPercentage()) + "%). \n");
-							
-				}
+	//Shows all results for student, even on removed exams
+	@FXML public void showResults() {
+		messagesArea.setText("");
+		String studentString = (String) pickStudent.getValue();//Selected student
+		if(studentString == null) {
+			messagesArea.setText("You must choose a student");
+			return;
+		}
+		String studentId = studentString.substring(studentString.length() - 6, studentString.length());
+		Student student = studentRegister.findStudent(studentId);
+		if(student != null) {
+			messagesArea.setText("Results for student " + student.getName() + "\n");//Headline
+			//For every exam the student has taken show grade, course, exam, points
+			for(Result result: student.getResults()) {
+				WrittenExam exam = result.getExam();
+				messagesArea.setText(messagesArea.getText() + "\nExam: " + exam.getExamID() + "  [" + exam.getCourse().getName() + "]  Grade: " + result.getGrade() + "  Points: " + result.getPoints()
+				+ "\n" + 
+						"Average Result: " + formatter.format(exam.getAverage()) + "  Median Result: " + formatter.format(exam.getMedian()) + "  Students Passed: " + (int)exam.passed() + " (" + formatter.format(exam.passPercentage()) + "%). \n");
+						
 			}
 		}
+	}
 		
 
 		
 	//To be able to show the list of students
 	//we have to turn the array list of type Student to an array list of type String
 	public ArrayList<String> studentsToStrings(ArrayList<Student> students) {
-		ArrayList<String> stringStudents = new ArrayList<String>();//Array list to be displayed in the list
-		//Make the string to be displayed in the list and add it to the list for every student in the db/register
+		ArrayList<String> stringStudents = new ArrayList<String>();
 		for(Student s: students) {
 			String studentString = "Name: " + s.getName() + ", Id: " + s.getStudentId();
 			stringStudents.add(studentString);

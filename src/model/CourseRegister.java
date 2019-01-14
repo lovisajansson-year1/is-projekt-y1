@@ -66,12 +66,12 @@ public class CourseRegister {
 			try {
 				System.out.println("Course name: " + course.getName());
 				
-			} catch (NullPointerException ingetNamn) {
+			} catch (NullPointerException noName) {
 				System.out.println(" Course doesn't have a name!");
 			}
 			try {
 				System.out.println("Course code: " + course.getCourseCode());
-			} catch(NullPointerException ingetId) {
+			} catch	(NullPointerException noId) {
 				System.out.println(" Course doesn't have a code ");
 			}
  		}
