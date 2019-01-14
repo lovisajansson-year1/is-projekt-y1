@@ -86,7 +86,7 @@ public class Controller {
 		}
 		Student newStudent = new Student(studentNameText.getText(), studentRegister);//Create new student to add to the DB
 		//Message the user that the user was created successfully (line below)
-		messagesArea.setText("The student " + newStudent.getName()+ " with course code " +  newStudent.getStudentId() + " har skapats!");
+		messagesArea.setText("The student " + newStudent.getName()+ " with course code " +  newStudent.getStudentId() + " has been created!");
 		this.updateStudentList(studentRegister.getStudents());//Update the list of students, with the new student added
 		studentNameText.setText("");//Remove the name the user wrote from the textfield
 	}
